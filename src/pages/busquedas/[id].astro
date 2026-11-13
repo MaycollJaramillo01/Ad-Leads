@@ -1,0 +1,10 @@
+---
+import Page from '../../layouts/Page.astro';
+import App from '../../components/App';
+const id = Number(Astro.params.id);
+if (!Number.isInteger(id) || id <= 0) return Astro.redirect('/busquedas');
+---
+
+<Page title={`Búsqueda #${id}`}>
+	<App client:only="react" view="search" id={id} />
+</Page>

@@ -1,0 +1,510 @@
+[{
+  "inputUrl": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=dentist&search_type=keyword_unordered&media_type=all",
+  "pageInfo": {
+    "adLibrarySystemStatus": {
+      "systemStatus": {
+        "status": "NO_KNOWN_ISSUES",
+        "activeIssues": [
+          {
+            "product": "Ad Library",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Ad Library Report",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Ad Library API",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Branded Content",
+            "status": "NO_KNOWN_ISSUES"
+          }
+        ]
+      }
+    },
+    "xfbAdLibraryIsCaptchaRequired": false,
+    "page": null,
+    "adLibraryUser": null
+  },
+  "pageID": "6806028948",
+  "adArchiveID": "2159069098321089",
+  "startDateFormatted": "2026-10-05T07:00:00.000Z",
+  "endDateFormatted": "2026-11-13T08:00:00.000Z",
+  "adArchiveId": "2159069098321089",
+  "collationCount": 5,
+  "collationId": "1061745410021250",
+  "pageId": "6806028948",
+  "snapshot": {
+    "brandedContent": null,
+    "pageId": "6806028948",
+    "pageIsDeleted": false,
+    "pageProfileUri": "https://www.facebook.com/SouthwestAir/",
+    "rootResharedPost": null,
+    "byline": null,
+    "disclaimerLabel": null,
+    "pageName": "Southwest Airlines",
+    "pageProfilePictureUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825278367_1829272291730557_52657525869905902_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=tf1doxk3FjoQ7kNvwE6F6ey&_nc_oc=AdosT0hhqnrxYoG66uO1w9wzQAt9hQpvkHg2FNrYZ7y3kC0M7O_YhTNAVy8oLB7rg3A&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTcKl9QijvDOcNpuecaZ8VJEmGMY0KeNBpan-g16_lISg&oe=6AFD38F1",
+    "event": null,
+    "caption": "Southwest.com",
+    "ctaText": "Book now",
+    "cards": [
+      {
+        "body": "",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
+        "title": null,
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825278528_1077607681916365_8173112729349561236_n.jpg?_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=OMmf6N8EWJMQ7kNvwHy5Fo2&_nc_oc=AdqDe8Z2SFGZAsRJkaDrUid2RGYokagbu96Ng3FifkJ5eyoZXWmLtcouWFoR_kndcMo&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQCKzBxv8NoUrV6mSJR4abQcLsT_qv4vHS6vXqj3N51BQ&oe=6AFD556D",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278557_1276016498937598_6387666800801061930_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=Ld7nPIOzy6sQ7kNvwGhigAP&_nc_oc=Adr445Mi1GZ13hWgLvp5bgqd6kUvHbWFXUJSc1NVvVAA6GpLBiAbbnKq53oxdfKfuQk&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTxj97zT44Zp2i_J9geW7t-QpZkYon09JODWqGbDRIBdA&oe=6AFD4EA2",
+        "watermarkedResizedImageUrl": ""
+      },
+      {
+        "body": "Drop everything and Enter Airplane Mode.",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
+        "title": "Hit your Booking Point™?",
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1440002981426843_6133026961485083696_n.jpg?_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qaSq4_J80msQ7kNvwE642Vw&_nc_oc=AdqdxsjsArSgLQJa0lUr6g4S5QkexMa9JTJsao7ReCJcs2SP-os_QSkq3lGjR02rXJQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQRsperHdmC8jbKV53o7azmWb6k8Z5BveMZj4-tM1ANYOw&oe=6AFD3BE0",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1770960900785520_2497453456175450524_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=KM4mVUyf5bgQ7kNvwGS5TMY&_nc_oc=AdqODEt8EEsZ_5a_xfBxh8wRS-9BGRDUyLlmsz1_iyiZCLk54naup75pSi3BvXG5b8M&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTInQUESh4EUHd0pO4Lw86r59IY6YWCrfLnwBlHWZ1IDQ&oe=6AFD3108",
+        "watermarkedResizedImageUrl": ""
+      },
+      {
+        "body": "Drop everything and Enter Airplane Mode.",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
+        "title": "Hit your Booking Point™?",
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825279387_1374055434888453_642994649999249783_n.jpg?_nc_cat=108&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=fWDBw71bb_UQ7kNvwEei7lM&_nc_oc=AdpRNSlIP19SrMlz_-Qd-nHO1sJicpGcueUNBCs8bTSaBcEmNVnnRqiDopJehawmlgc&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQR6eCFMVjyCcOx7X8NVGA0V_c7xak1WBsrxEfGs2Vgkng&oe=6AFD445F",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278980_1585962775790120_289165000387057910_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=gUfeyg7gv84Q7kNvwF-2Zhk&_nc_oc=AdqSeQIP0nKG42srZ-_LgFrbTxjgfgxnrxqDJMQ6mTpgCWbDK6xA5LMpOSmOmuWKBK8&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQT7ixX9tMM3UtRo6qLXXPmgkhzoU5rsOkvlA2SNwXfo4A&oe=6AFD4D08",
+        "watermarkedResizedImageUrl": ""
+      },
+      {
+        "body": "Drop everything and Enter Airplane Mode.",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
+        "title": "Hit your Booking Point™?",
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1440002981426843_6133026961485083696_n.jpg?_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qaSq4_J80msQ7kNvwE642Vw&_nc_oc=AdqdxsjsArSgLQJa0lUr6g4S5QkexMa9JTJsao7ReCJcs2SP-os_QSkq3lGjR02rXJQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQRsperHdmC8jbKV53o7azmWb6k8Z5BveMZj4-tM1ANYOw&oe=6AFD3BE0",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1770960900785520_2497453456175450524_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=KM4mVUyf5bgQ7kNvwGS5TMY&_nc_oc=AdqODEt8EEsZ_5a_xfBxh8wRS-9BGRDUyLlmsz1_iyiZCLk54naup75pSi3BvXG5b8M&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTInQUESh4EUHd0pO4Lw86r59IY6YWCrfLnwBlHWZ1IDQ&oe=6AFD3108",
+        "watermarkedResizedImageUrl": ""
+      }
+    ],
+    "body": {
+      "text": "Drop everything and Enter Airplane Mode."
+    },
+    "ctaType": "BOOK_TRAVEL",
+    "displayFormat": "DCO",
+    "linkDescription": "Ready to book?",
+    "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
+    "images": [],
+    "pageCategories": [
+      "Travel Company"
+    ],
+    "pageLikeCount": 6298695,
+    "title": "Hit your Booking Point™?",
+    "videos": [],
+    "isReshared": false,
+    "extraLinks": [],
+    "extraTexts": [],
+    "extraImages": [],
+    "extraVideos": [],
+    "countryIsoCode": null,
+    "brazilTaxId": null,
+    "additionalInfo": null,
+    "ecCertificates": []
+  },
+  "isActive": true,
+  "hasUserReported": false,
+  "reportCount": null,
+  "menuItems": [],
+  "stateMediaRunLabel": null,
+  "pageIsDeleted": false,
+  "pageName": "Southwest Airlines",
+  "impressionsWithIndex": {
+    "impressionsText": null,
+    "impressionsIndex": -1
+  },
+  "gatedType": "ELIGIBLE",
+  "categories": [
+    "UNKNOWN"
+  ],
+  "isAaaEligible": false,
+  "containsDigitalCreatedMedia": false,
+  "reachEstimate": null,
+  "currency": "",
+  "spend": null,
+  "endDate": 1794556800,
+  "publisherPlatform": [
+    "FACEBOOK",
+    "INSTAGRAM",
+    "AUDIENCE_NETWORK"
+  ],
+  "startDate": 1791183600,
+  "containsSensitiveContent": false,
+  "totalActiveTime": null,
+  "regionalRegulationData": {
+    "finserv": {
+      "isDeemedFinserv": false,
+      "isLimitedDelivery": false
+    },
+    "twAntiScam": {
+      "isLimitedDelivery": false
+    }
+  },
+  "hideDataStatus": "NONE",
+  "fevInfo": null,
+  "adId": null,
+  "targetedOrReachedCountries": []
+},
+{
+  "inputUrl": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=dentist&search_type=keyword_unordered&media_type=all",
+  "pageInfo": {
+    "adLibrarySystemStatus": {
+      "systemStatus": {
+        "status": "NO_KNOWN_ISSUES",
+        "activeIssues": [
+          {
+            "product": "Ad Library",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Ad Library Report",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Ad Library API",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Branded Content",
+            "status": "NO_KNOWN_ISSUES"
+          }
+        ]
+      }
+    },
+    "xfbAdLibraryIsCaptchaRequired": false,
+    "page": null,
+    "adLibraryUser": null
+  },
+  "pageID": "6806028948",
+  "adArchiveID": "2013733006002360",
+  "startDateFormatted": "2026-10-05T07:00:00.000Z",
+  "endDateFormatted": "2026-11-13T08:00:00.000Z",
+  "adArchiveId": "2013733006002360",
+  "collationCount": null,
+  "collationId": "1061745410021250",
+  "pageId": "6806028948",
+  "snapshot": {
+    "brandedContent": null,
+    "pageId": "6806028948",
+    "pageIsDeleted": false,
+    "pageProfileUri": "https://www.facebook.com/SouthwestAir/",
+    "rootResharedPost": null,
+    "byline": null,
+    "disclaimerLabel": null,
+    "pageName": "Southwest Airlines",
+    "pageProfilePictureUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825267666_1422141613326397_1267837410890325095_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=W-hENGbgjBAQ7kNvwFxQsA0&_nc_oc=AdosG_I1YDPunXwp94i_JREoB9flHeAkWoZ52opWaY5jDGa6xwCDfXH5m6S8sxxM018&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTZLESwRBALsMqXCVFReMROROPW5UDmSy56sGjbWqys6w&oe=6AFD2B8A",
+    "event": null,
+    "caption": "Southwest.com",
+    "ctaText": "Book now",
+    "cards": [
+      {
+        "body": "",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
+        "title": null,
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825351044_1838668903974457_7517957191052434586_n.jpg?_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=3dZ6Gr1NDWYQ7kNvwFuekIB&_nc_oc=AdrdqEczgJBx4yChGe6j28VaNk1gG1_c31QsZojHMPxtWD29iG39VrtGxoDtE_qvjP4&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTlrLoyhVIKCLqGIaxfz6bbuYBWWvGfXri5ZGVHNgH7LA&oe=6AFD5507",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825266759_1059017547152514_7964500183641017660_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=UJ3ZMElHe9gQ7kNvwGr4K-9&_nc_oc=AdrV7KCO0KJuULanEdowECsqWtBHBhzkvSlexrtKXj8DBkVpBacKJRtXnJeNzt4f0Bk&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQS3mBnLgWBrunxB-w5kXPYOdr-D5CHMNdqd0sJwWw80PA&oe=6AFD43CE",
+        "watermarkedResizedImageUrl": ""
+      },
+      {
+        "body": "Drop everything and Enter Airplane Mode.",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
+        "title": "Hit your Booking Point™?",
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825350878_1454262923528294_5191651861800416462_n.jpg?_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=dBCB57P-fPEQ7kNvwH6zIUC&_nc_oc=Adoab8l_S8EgjeCp7bGrdLyIdmnt1SShuSU3utZdTWl8HIoqhB592tqJkbCwPEpQU2w&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ81kp8unZw7EIiyAuHrFh3GVyKHhuYNXeW9fj7wSmPuw&oe=6AFD4FB2",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825326790_1631467005282008_3417022531276537856_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qiGgJ1YxkgMQ7kNvwE5-lEC&_nc_oc=Adri6XoFPw18k3IFVbsCN9FmM2x-nD7-Xavtxl3mDt17yIklkc7YKKGbAhP5gYDT8oQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ2XQJiYaotwRcNxYcBSXA04-6CbQJ0cBTcJBh6oa7P5Q&oe=6AFD2A1D",
+        "watermarkedResizedImageUrl": ""
+      },
+      {
+        "body": "Drop everything and Enter Airplane Mode.",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
+        "title": "Hit your Booking Point™?",
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825351740_1270207988563951_2483620804976389087_n.jpg?_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=f5DS6V3uJ18Q7kNvwF5xofN&_nc_oc=AdpxaPzM-p3ng3oL9A4RTmUTHBplQejZrNvEpF6ezptTY_Au3MZho8VIGzP6F4RnZ54&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTY2wJLFUqh8MnUu9_fzYNmyc63M7Z8g6qP8FojhrBMgw&oe=6AFD49C0",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825267591_1774592313757762_8589362282593481338_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=SbntVya_mFQQ7kNvwFmTwP_&_nc_oc=AdreWkxXZ78gsK3paHD7JCLT6wRng-HPrmRNYme2mpnUznYze27pDAwq0iHcYw4WL48&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ88tJQUuC9C8Ey6i_cnjx76EO1r1TlJAWmbU1hXuKrow&oe=6AFD54C4",
+        "watermarkedResizedImageUrl": ""
+      },
+      {
+        "body": "Drop everything and Enter Airplane Mode.",
+        "ctaType": "BOOK_TRAVEL",
+        "caption": "Southwest.com",
+        "linkDescription": "Ready to book?",
+        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
+        "title": "Hit your Booking Point™?",
+        "ctaText": "Book Now",
+        "videoHdUrl": null,
+        "videoPreviewImageUrl": null,
+        "videoSdUrl": null,
+        "watermarkedVideoHdUrl": null,
+        "watermarkedVideoSdUrl": null,
+        "imageCrops": [],
+        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825350878_1454262923528294_5191651861800416462_n.jpg?_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=dBCB57P-fPEQ7kNvwH6zIUC&_nc_oc=Adoab8l_S8EgjeCp7bGrdLyIdmnt1SShuSU3utZdTWl8HIoqhB592tqJkbCwPEpQU2w&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ81kp8unZw7EIiyAuHrFh3GVyKHhuYNXeW9fj7wSmPuw&oe=6AFD4FB2",
+        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825326790_1631467005282008_3417022531276537856_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qiGgJ1YxkgMQ7kNvwE5-lEC&_nc_oc=Adri6XoFPw18k3IFVbsCN9FmM2x-nD7-Xavtxl3mDt17yIklkc7YKKGbAhP5gYDT8oQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ2XQJiYaotwRcNxYcBSXA04-6CbQJ0cBTcJBh6oa7P5Q&oe=6AFD2A1D",
+        "watermarkedResizedImageUrl": ""
+      }
+    ],
+    "body": {
+      "text": "Drop everything and Enter Airplane Mode."
+    },
+    "ctaType": "BOOK_TRAVEL",
+    "displayFormat": "DCO",
+    "linkDescription": "Ready to book?",
+    "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
+    "images": [],
+    "pageCategories": [
+      "Travel Company"
+    ],
+    "pageLikeCount": 6298695,
+    "title": "Hit your Booking Point™?",
+    "videos": [],
+    "isReshared": false,
+    "extraLinks": [],
+    "extraTexts": [],
+    "extraImages": [],
+    "extraVideos": [],
+    "countryIsoCode": null,
+    "brazilTaxId": null,
+    "additionalInfo": null,
+    "ecCertificates": []
+  },
+  "isActive": true,
+  "hasUserReported": false,
+  "reportCount": null,
+  "menuItems": [],
+  "stateMediaRunLabel": null,
+  "pageIsDeleted": false,
+  "pageName": "Southwest Airlines",
+  "impressionsWithIndex": {
+    "impressionsText": null,
+    "impressionsIndex": -1
+  },
+  "gatedType": "ELIGIBLE",
+  "categories": [
+    "UNKNOWN"
+  ],
+  "isAaaEligible": false,
+  "containsDigitalCreatedMedia": false,
+  "reachEstimate": null,
+  "currency": "",
+  "spend": null,
+  "endDate": 1794556800,
+  "publisherPlatform": [
+    "FACEBOOK",
+    "INSTAGRAM",
+    "AUDIENCE_NETWORK"
+  ],
+  "startDate": 1791183600,
+  "containsSensitiveContent": false,
+  "totalActiveTime": null,
+  "regionalRegulationData": {
+    "finserv": {
+      "isDeemedFinserv": false,
+      "isLimitedDelivery": false
+    },
+    "twAntiScam": {
+      "isLimitedDelivery": false
+    }
+  },
+  "hideDataStatus": "NONE",
+  "fevInfo": null,
+  "adId": null,
+  "targetedOrReachedCountries": []
+},
+{
+  "inputUrl": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=dentist&search_type=keyword_unordered&media_type=all",
+  "pageInfo": {
+    "adLibrarySystemStatus": {
+      "systemStatus": {
+        "status": "NO_KNOWN_ISSUES",
+        "activeIssues": [
+          {
+            "product": "Ad Library",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Ad Library Report",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Ad Library API",
+            "status": "NO_KNOWN_ISSUES"
+          },
+          {
+            "product": "Branded Content",
+            "status": "NO_KNOWN_ISSUES"
+          }
+        ]
+      }
+    },
+    "xfbAdLibraryIsCaptchaRequired": false,
+    "page": null,
+    "adLibraryUser": null
+  },
+  "pageID": "1664080403827654",
+  "adArchiveID": "1051944533495459",
+  "startDateFormatted": "2025-05-07T07:00:00.000Z",
+  "endDateFormatted": "2026-11-13T08:00:00.000Z",
+  "adArchiveId": "1051944533495459",
+  "collationCount": 1,
+  "collationId": "714912444410648",
+  "pageId": "1664080403827654",
+  "snapshot": {
+    "brandedContent": null,
+    "pageId": "1664080403827654",
+    "pageIsDeleted": false,
+    "pageProfileUri": "https://www.facebook.com/levydentistry/",
+    "rootResharedPost": null,
+    "byline": null,
+    "disclaimerLabel": null,
+    "pageName": "Levy Goldman Dentistry",
+    "pageProfilePictureUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/495691473_1022070079506557_6733230835754100626_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=Dl-it9k2X0sQ7kNvwES3WTu&_nc_oc=AdrN9t70cTjeQjCuDhAMFTtLCfy8A5YwkDHBQ9pzJhbyYhU-2QLuRdYkDKAl8raWcfU&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQS5l2B0hlI88wVZ-qykgVCG7IPeg5ihIyV8bCP7fxxjnA&oe=6AFD4EDB",
+    "event": null,
+    "caption": "instagram.com",
+    "ctaText": "Visit Instagram profile",
+    "cards": [],
+    "body": {
+      "text": "The truth about veneers is that they can look super natural.\n\nThe truth about veneers is that they can look like an enhanced version of YOUR NATURAL SMILE.\n\nThe truth about veneers is that you don’t always have to shave down your teeth.\n\nThe truth about veneers is that you need to find a dentist that loves doing them and that uses a highly skilled lab that creates dental art, not just slabs of porcelain."
+    },
+    "ctaType": "VIEW_INSTAGRAM_PROFILE",
+    "displayFormat": "VIDEO",
+    "linkDescription": null,
+    "linkUrl": "http://instagram.com/dr.naomigoldman",
+    "images": [],
+    "pageCategories": [
+      "Cosmetic Dentist"
+    ],
+    "pageLikeCount": 1362,
+    "title": null,
+    "videos": [
+      {
+        "videoHdUrl": "https://video-sea5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQOsARLZzV6Z9vMhDPw_UoCHpyoi45VU4mJVcezHT5hhVE20CokYLgVVe8-US_t83xfb9P0HaN4n1s4u2dAh4qh9.mp4?_nc_cat=103&_nc_sid=ef5aa3&_nc_ht=video-sea5-1.xx.fbcdn.net&_nc_ohc=1PE6rFD0f3gQ7kNvwHr_pw5&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmFzaWNfaHEyX2hkX3Byb2dyZXNzaXZlIiwieHB2X2Fzc2V0X2lkIjoxMDY3ODIyNzY1MzYxNzE5LCJhc3NldF9hZ2VfZGF5cyI6MzU4LCJ2aV91c2VjYXNlX2lkIjoxMDY4MCwiZHVyYXRpb25fcyI6NjUsIndhdGNoX3RpbWVfcyI6MCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&_nc_map=urlgen_bucketless&_nc_zt=28&oh=00_AQTuEZwCV68Tgf6y8JKQZR8sAfK1NV1-HUrUgy6IddW6ng&oe=6AFD4D8C",
+        "videoPreviewImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/495389881_1022720536480287_2160565059732714719_n.jpg?_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=zPKhmeVc1oMQ7kNvwFO4DDI&_nc_oc=AdpONfQsOou8G2cfpl6YiJ7W7OJ8xQNFti-Vl04lhjPiZGt5-7k9V1xBmX4QLkCPBKU&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQR9oqEYHbI_9oR0eTwj98-rCredRyxDUrLP8c-OgEEtHg&oe=6AFD3518",
+        "videoSdUrl": "https://video-sea5-2.xx.fbcdn.net/o1/v/t2/f2/m412/AQMTsn9zegrezt6_s1KQ2WcdtdwKDIfTHVbY_Z8GL1a7cm8wuWhyEfnh2Ndy7KDMBG90qwJ7bfEfzRsvLZSCtnst.mp4?_nc_cat=108&_nc_sid=ef5aa3&_nc_ht=video-sea5-2.xx.fbcdn.net&_nc_ohc=9VKL98q5I8IQ7kNvwFvFVXG&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLmFzaWNfaHExX3NkX3Byb2dyZXNzaXZlIiwieHB2X2Fzc2V0X2lkIjoxMDY3ODIyNzY1MzYxNzE5LCJhc3NldF9hZ2VfZGF5cyI6MzU4LCJ2aV91c2VjYXNlX2lkIjoxMDY4MCwiZHVyYXRpb25fcyI6NjUsIndhdGNoX3RpbWVfcyI6MCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&_nc_map=urlgen_bucketless&_nc_zt=28&oh=00_AQRWQEbK_qbwb3wF-lYUK-nKDlWi0YNF94S8jwsycShclQ&oe=6AFD2EFD",
+        "watermarkedVideoHdUrl": "",
+        "watermarkedVideoSdUrl": ""
+      }
+    ],
+    "isReshared": false,
+    "extraLinks": [],
+    "extraTexts": [],
+    "extraImages": [],
+    "extraVideos": [],
+    "countryIsoCode": null,
+    "brazilTaxId": null,
+    "additionalInfo": null,
+    "ecCertificates": []
+  },
+  "isActive": true,
+  "hasUserReported": false,
+  "reportCount": null,
+  "menuItems": [],
+  "stateMediaRunLabel": null,
+  "pageIsDeleted": false,
+  "pageName": "Levy Goldman Dentistry",
+  "impressionsWithIndex": {
+    "impressionsText": null,
+    "impressionsIndex": -1
+  },
+  "gatedType": "ELIGIBLE",
+  "categories": [
+    "UNKNOWN"
+  ],
+  "isAaaEligible": true,
+  "containsDigitalCreatedMedia": false,
+  "reachEstimate": null,
+  "currency": "",
+  "spend": null,
+  "endDate": 1794556800,
+  "publisherPlatform": [
+    "FACEBOOK",
+    "INSTAGRAM"
+  ],
+  "startDate": 1746601200,
+  "containsSensitiveContent": false,
+  "totalActiveTime": null,
+  "regionalRegulationData": {
+    "finserv": {
+      "isDeemedFinserv": false,
+      "isLimitedDelivery": false
+    },
+    "twAntiScam": {
+      "isLimitedDelivery": false
+    }
+  },
+  "hideDataStatus": "NONE",
+  "fevInfo": null,
+  "adId": null,
+  "targetedOrReachedCountries": []
+}]

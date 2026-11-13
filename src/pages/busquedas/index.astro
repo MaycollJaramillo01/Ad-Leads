@@ -1,0 +1,8 @@
+---
+import Page from '../../layouts/Page.astro';
+import App from '../../components/App';
+---
+
+<Page title="Historial de búsquedas">
+	<App client:only="react" view="searches" />
+</Page>
