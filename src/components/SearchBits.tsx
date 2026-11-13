@@ -12,6 +12,7 @@ export function SearchStatusBadge({search}: {search: Search}) {
 
 /** What the worker is doing right now, in words; shared by the list and the detail page. */
 export function stepText(s: Search, queuePosition = -1): string {
+  if (s.cancel_requested) return 'Cancelando… se guarda lo que ya se extrajo';
   if (s.status === 'queued') return queuePosition > 0 ? `En cola · ${queuePosition} búsqueda(s) por delante` : 'Preparando la búsqueda…';
   if (s.status === 'ads') return `Buscando anuncios en la Ads Library… ${num.format(s.progress)} encontrados`;
   if (s.status === 'pages') return `Extrayendo contactos… ${num.format(s.progress)} de ${num.format(s.progress_total)} páginas`;

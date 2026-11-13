@@ -1,510 +1,306 @@
-[{
-  "inputUrl": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=dentist&search_type=keyword_unordered&media_type=all",
-  "pageInfo": {
-    "adLibrarySystemStatus": {
-      "systemStatus": {
-        "status": "NO_KNOWN_ISSUES",
-        "activeIssues": [
-          {
-            "product": "Ad Library",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Ad Library Report",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Ad Library API",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Branded Content",
-            "status": "NO_KNOWN_ISSUES"
-          }
-        ]
-      }
-    },
-    "xfbAdLibraryIsCaptchaRequired": false,
-    "page": null,
-    "adLibraryUser": null
-  },
-  "pageID": "6806028948",
-  "adArchiveID": "2159069098321089",
-  "startDateFormatted": "2026-10-05T07:00:00.000Z",
-  "endDateFormatted": "2026-11-13T08:00:00.000Z",
-  "adArchiveId": "2159069098321089",
-  "collationCount": 5,
-  "collationId": "1061745410021250",
-  "pageId": "6806028948",
+[
+ {
+  "ad_archive_id": "1030132699738532",
+  "collation_count": 1,
+  "collation_id": "4381164898867581",
+  "is_active": true,
+  "page_id": "232733040158146",
+  "page_is_deleted": false,
   "snapshot": {
-    "brandedContent": null,
-    "pageId": "6806028948",
-    "pageIsDeleted": false,
-    "pageProfileUri": "https://www.facebook.com/SouthwestAir/",
-    "rootResharedPost": null,
-    "byline": null,
-    "disclaimerLabel": null,
-    "pageName": "Southwest Airlines",
-    "pageProfilePictureUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825278367_1829272291730557_52657525869905902_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=tf1doxk3FjoQ7kNvwE6F6ey&_nc_oc=AdosT0hhqnrxYoG66uO1w9wzQAt9hQpvkHg2FNrYZ7y3kC0M7O_YhTNAVy8oLB7rg3A&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTcKl9QijvDOcNpuecaZ8VJEmGMY0KeNBpan-g16_lISg&oe=6AFD38F1",
-    "event": null,
-    "caption": "Southwest.com",
-    "ctaText": "Book now",
-    "cards": [
-      {
-        "body": "",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
-        "title": null,
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825278528_1077607681916365_8173112729349561236_n.jpg?_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=OMmf6N8EWJMQ7kNvwHy5Fo2&_nc_oc=AdqDe8Z2SFGZAsRJkaDrUid2RGYokagbu96Ng3FifkJ5eyoZXWmLtcouWFoR_kndcMo&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQCKzBxv8NoUrV6mSJR4abQcLsT_qv4vHS6vXqj3N51BQ&oe=6AFD556D",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278557_1276016498937598_6387666800801061930_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=Ld7nPIOzy6sQ7kNvwGhigAP&_nc_oc=Adr445Mi1GZ13hWgLvp5bgqd6kUvHbWFXUJSc1NVvVAA6GpLBiAbbnKq53oxdfKfuQk&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTxj97zT44Zp2i_J9geW7t-QpZkYon09JODWqGbDRIBdA&oe=6AFD4EA2",
-        "watermarkedResizedImageUrl": ""
-      },
-      {
-        "body": "Drop everything and Enter Airplane Mode.",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
-        "title": "Hit your Booking Point™?",
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1440002981426843_6133026961485083696_n.jpg?_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qaSq4_J80msQ7kNvwE642Vw&_nc_oc=AdqdxsjsArSgLQJa0lUr6g4S5QkexMa9JTJsao7ReCJcs2SP-os_QSkq3lGjR02rXJQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQRsperHdmC8jbKV53o7azmWb6k8Z5BveMZj4-tM1ANYOw&oe=6AFD3BE0",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1770960900785520_2497453456175450524_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=KM4mVUyf5bgQ7kNvwGS5TMY&_nc_oc=AdqODEt8EEsZ_5a_xfBxh8wRS-9BGRDUyLlmsz1_iyiZCLk54naup75pSi3BvXG5b8M&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTInQUESh4EUHd0pO4Lw86r59IY6YWCrfLnwBlHWZ1IDQ&oe=6AFD3108",
-        "watermarkedResizedImageUrl": ""
-      },
-      {
-        "body": "Drop everything and Enter Airplane Mode.",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
-        "title": "Hit your Booking Point™?",
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825279387_1374055434888453_642994649999249783_n.jpg?_nc_cat=108&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=fWDBw71bb_UQ7kNvwEei7lM&_nc_oc=AdpRNSlIP19SrMlz_-Qd-nHO1sJicpGcueUNBCs8bTSaBcEmNVnnRqiDopJehawmlgc&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQR6eCFMVjyCcOx7X8NVGA0V_c7xak1WBsrxEfGs2Vgkng&oe=6AFD445F",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278980_1585962775790120_289165000387057910_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=gUfeyg7gv84Q7kNvwF-2Zhk&_nc_oc=AdqSeQIP0nKG42srZ-_LgFrbTxjgfgxnrxqDJMQ6mTpgCWbDK6xA5LMpOSmOmuWKBK8&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQT7ixX9tMM3UtRo6qLXXPmgkhzoU5rsOkvlA2SNwXfo4A&oe=6AFD4D08",
-        "watermarkedResizedImageUrl": ""
-      },
-      {
-        "body": "Drop everything and Enter Airplane Mode.",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
-        "title": "Hit your Booking Point™?",
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1440002981426843_6133026961485083696_n.jpg?_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qaSq4_J80msQ7kNvwE642Vw&_nc_oc=AdqdxsjsArSgLQJa0lUr6g4S5QkexMa9JTJsao7ReCJcs2SP-os_QSkq3lGjR02rXJQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQRsperHdmC8jbKV53o7azmWb6k8Z5BveMZj4-tM1ANYOw&oe=6AFD3BE0",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825278967_1770960900785520_2497453456175450524_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=KM4mVUyf5bgQ7kNvwGS5TMY&_nc_oc=AdqODEt8EEsZ_5a_xfBxh8wRS-9BGRDUyLlmsz1_iyiZCLk54naup75pSi3BvXG5b8M&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTInQUESh4EUHd0pO4Lw86r59IY6YWCrfLnwBlHWZ1IDQ&oe=6AFD3108",
-        "watermarkedResizedImageUrl": ""
-      }
-    ],
-    "body": {
-      "text": "Drop everything and Enter Airplane Mode."
-    },
-    "ctaType": "BOOK_TRAVEL",
-    "displayFormat": "DCO",
-    "linkDescription": "Ready to book?",
-    "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29394",
-    "images": [],
-    "pageCategories": [
-      "Travel Company"
-    ],
-    "pageLikeCount": 6298695,
-    "title": "Hit your Booking Point™?",
-    "videos": [],
-    "isReshared": false,
-    "extraLinks": [],
-    "extraTexts": [],
-    "extraImages": [],
-    "extraVideos": [],
-    "countryIsoCode": null,
-    "brazilTaxId": null,
-    "additionalInfo": null,
-    "ecCertificates": []
+   "branded_content": null,
+   "page_id": "232733040158146",
+   "page_is_deleted": false,
+   "page_profile_uri": "https://www.facebook.com/CEYESOV/",
+   "root_reshared_post": null,
+   "byline": "",
+   "disclaimer_label": null,
+   "page_name": "Centro de Especialidades y Estudios Superiores Odontológicos de Veracruz",
+   "page_profile_picture_url": "https://scontent.fopo2-1.fna.fbcdn.net/v/t39.35426-6/747604750_1621417119977573_406312466269529855_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=IteLqofKxy0Q7kNvwESkrkg&_nc_oc=Adr3XcD93EhKLWEzah8wjq0GwBoty5DdYwAY4yj-RLbDzXCkdyitHSTrP5Zy81LThKM&_nc_zt=14&_nc_ht=scontent.fopo2-1.fna&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&oh=00_AQT972_RJPYBvzCgfhUeZD9dPCICWB0gp8_0gwii_QKKLg&oe=6AFD589B",
+   "event": null,
+   "caption": null,
+   "cta_text": "Send WhatsApp message",
+   "cards": [],
+   "body": {
+    "text": "🦷 Tu futuro en odontología empieza hoy.\n\nEstudia la Licenciatura en Cirujano Dentista en Universidad CEYESOV y prepárate con una formación clínica, académica y profesional enfocada en los retos reales de la odontología.\n\n✅ Inscripciones abiertas\n🎓 Da el primer paso hacia una carrera con propósito.\n\n📲 Informes: 229 903 6290\n\n#loveceyesov #Ceyesov #CirujanoDentista #odontologo #dentistas #esr"
+   },
+   "cta_type": "WHATSAPP_MESSAGE",
+   "display_format": "VIDEO",
+   "link_description": null,
+   "link_url": null,
+   "images": [],
+   "page_categories": [
+    "Dentista"
+   ],
+   "page_like_count": 74503,
+   "title": null,
+   "videos": [
+    {
+     "video_hd_url": "https://video.fopo6-1.fna.fbcdn.net/o1/v/t2/f2/m366/AQNcNi_KEkwQVArSNq0O-HHyNQF8YQmepzigu59GhF2A1A_LUzrRXZ6-xZvn8ThKkrdrDzZv3Viu8vbb6HT-slsB67MXy_A0qo_DPp2WDMtxkw.mp4?_nc_cat=104&_nc_oc=AdpwiucL2ZCDuYS6-r0tW-MN0ocudi9yekkmvHyo71eodhbjA8eQ2KbHq1Pf0OxAIN0&_nc_sid=b66105&_nc_ht=video.fopo6-1.fna.fbcdn.net&_nc_ohc=d99aqhJ74BMQ7kNvwFPz_4_&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHAiLCJ4cHZfYXNzZXRfaWQiOjEzNDQzMTIyOTQzNDE0MzMsImFzc2V0X2FnZV9kYXlzIjoxMjMsInZpX3VzZWNhc2VfaWQiOjEwMTIyLCJkdXJhdGlvbl9zIjo4OCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=c70a9512dbfa8944&_nc_vs=HBksFQIYRWZiX2VwaGVtZXJhbC83RjQ1OTUxODZGM0RDM0Y0RjBGNzUxOEEyMDZDMTJCOF9tdF8xX3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAVAhhAZmJfcGVybWFuZW50LzFENDA1MzMxMzdDQTAyRDRFQkFFRTUxNjFFN0U0NUI1X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwOIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRJjb3B5X3NhbXBsZV9ncm91cHMBMRUAACby7KuMo6njBBUCKAJDMywXQFY1T987ZFoYGWRhc2hfaDI2NC1iYXNpYy1nZW4yXzcyMHARAHUAZZSeAQA&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&_nc_map=urlgen_bucketless&_nc_zt=28&_nc_enc=UsARlLe0YKypzwM8nH0VvvW2x77IMXOSoIXTX57-dcxXAriQH4hV3mHDE65u9I2glhYIHaH88F52gK9FT-ni18Py1NDmePE8yDezVQ-PggAYAdpwG6wvvjmj8pA&oh=00_AQRnOEYWmIR4pbZrVZNPvCvCQzfJLr9RU3264VYbtmSc7w&oe=6AFD689C",
+     "video_preview_image_url": "https://scontent.fopo2-2.fna.fbcdn.net/v/t39.35426-6/747587168_1723865828808469_4609612929943150455_n.jpg?_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=032HFCWT7_4Q7kNvwFtaLfz&_nc_oc=Adq1B6OQB7oyBM3KnqEaWqKq9U0JAJ01nvtLYcFoyNq20KbsI2m5FtNOdUNh_fuSavA&_nc_zt=14&_nc_ht=scontent.fopo2-2.fna&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&oh=00_AQQIvsRgCIbiX0NUttwJVv9vlvJDX1xeYbjKYhuSmPN2Mg&oe=6AFD60FA",
+     "video_sd_url": "https://video.fopo6-1.fna.fbcdn.net/o1/v/t2/f2/m412/AQMsL_PtJLYZb3GVvBHgWeZNKF6dralRP84sHfCZrhjPUmUJ4ZrwSCZZauA6V15z-7yEdLRKa79IBb2_IOvMO_QUXabsN2jNScyTFTtNiw.mp4?_nc_cat=111&_nc_oc=Adr595MgP_hpA41-JGOa17Wpm89hs3wixO5MnvHYxf1H-8ARQr_rl_6N3uJgUY-5Pz0&_nc_sid=ef5aa3&_nc_ht=video.fopo6-1.fna.fbcdn.net&_nc_ohc=i4mMDEdHjxQQ7kNvwGJR-y6&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTM0NDMxMjI5NDM0MTQzMywiYXNzZXRfYWdlX2RheXMiOjEyMywidmlfdXNlY2FzZV9pZCI6MTAxMjIsImR1cmF0aW9uX3MiOjg4LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&_nc_map=urlgen_bucketless&_nc_zt=28&_nc_enc=UhfLxevtlG9QN0mZls6ALqflV4a97szm5qw7EF8M4cFdtaxOlKDoG2WCc3QbuWbzUnUABQu4CBxRYDrPY80KYnH91jUFt754kLUBHA2l8ZzIWCW-xZkLxwQIzEw&oh=00_AQTAL5umydygsFPjwqWrGez4DaVu0sDfAfz5tYW9Qt4c4Q&oe=6AFD47E7",
+     "watermarked_video_hd_url": null,
+     "watermarked_video_sd_url": null
+    }
+   ],
+   "is_reshared": false,
+   "extra_links": [],
+   "extra_texts": [],
+   "extra_images": [],
+   "extra_videos": [],
+   "country_iso_code": null,
+   "brazil_tax_id": null,
+   "additional_info": null,
+   "ec_certificates": []
   },
-  "isActive": true,
-  "hasUserReported": false,
-  "reportCount": null,
-  "menuItems": [],
-  "stateMediaRunLabel": null,
-  "pageIsDeleted": false,
-  "pageName": "Southwest Airlines",
-  "impressionsWithIndex": {
-    "impressionsText": null,
-    "impressionsIndex": -1
+  "has_user_reported": false,
+  "report_count": null,
+  "menu_items": [],
+  "state_media_run_label": null,
+  "page_name": "Centro de Especialidades y Estudios Superiores Odontológicos de Veracruz",
+  "impressions_with_index": {
+   "impressions_text": null,
+   "impressions_index": -1
   },
-  "gatedType": "ELIGIBLE",
+  "gated_type": "ELIGIBLE",
   "categories": [
-    "UNKNOWN"
+   "UNKNOWN"
   ],
-  "isAaaEligible": false,
-  "containsDigitalCreatedMedia": false,
-  "reachEstimate": null,
+  "is_aaa_eligible": false,
+  "contains_digital_created_media": false,
+  "reach_estimate": null,
   "currency": "",
   "spend": null,
-  "endDate": 1794556800,
-  "publisherPlatform": [
-    "FACEBOOK",
-    "INSTAGRAM",
-    "AUDIENCE_NETWORK"
+  "end_date": 1794556800,
+  "publisher_platform": [
+   "FACEBOOK",
+   "INSTAGRAM"
   ],
-  "startDate": 1791183600,
-  "containsSensitiveContent": false,
-  "totalActiveTime": null,
-  "regionalRegulationData": {
-    "finserv": {
-      "isDeemedFinserv": false,
-      "isLimitedDelivery": false
-    },
-    "twAntiScam": {
-      "isLimitedDelivery": false
-    }
+  "start_date": 1783926000,
+  "contains_sensitive_content": false,
+  "total_active_time": null,
+  "regional_regulation_data": {
+   "finserv": {
+    "is_deemed_finserv": false,
+    "is_limited_delivery": false
+   },
+   "tw_anti_scam": {
+    "is_limited_delivery": false
+   }
   },
-  "hideDataStatus": "NONE",
-  "fevInfo": null,
-  "adId": null,
-  "targetedOrReachedCountries": []
-},
-{
-  "inputUrl": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=dentist&search_type=keyword_unordered&media_type=all",
-  "pageInfo": {
-    "adLibrarySystemStatus": {
-      "systemStatus": {
-        "status": "NO_KNOWN_ISSUES",
-        "activeIssues": [
-          {
-            "product": "Ad Library",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Ad Library Report",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Ad Library API",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Branded Content",
-            "status": "NO_KNOWN_ISSUES"
-          }
-        ]
-      }
-    },
-    "xfbAdLibraryIsCaptchaRequired": false,
-    "page": null,
-    "adLibraryUser": null
-  },
-  "pageID": "6806028948",
-  "adArchiveID": "2013733006002360",
-  "startDateFormatted": "2026-10-05T07:00:00.000Z",
-  "endDateFormatted": "2026-11-13T08:00:00.000Z",
-  "adArchiveId": "2013733006002360",
-  "collationCount": null,
-  "collationId": "1061745410021250",
-  "pageId": "6806028948",
+  "hide_data_status": "NONE",
+  "fev_info": null,
+  "ad_id": null,
+  "targeted_or_reached_countries": [],
+  "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=MX&q=dentista&search_type=keyword_unordered&media_type=all",
+  "total": 10001,
+  "position": 1,
+  "ads_count": 1,
+  "start_date_formatted": "2026-07-13 07:00:00",
+  "end_date_formatted": "2026-11-13 08:00:00",
+  "ad_library_url": "https://www.facebook.com/ads/library/?id=1030132699738532"
+ },
+ {
+  "ad_archive_id": "26077794028477842",
+  "collation_count": 1,
+  "collation_id": "1996610124469427",
+  "is_active": true,
+  "page_id": "1647795985469904",
+  "page_is_deleted": false,
   "snapshot": {
-    "brandedContent": null,
-    "pageId": "6806028948",
-    "pageIsDeleted": false,
-    "pageProfileUri": "https://www.facebook.com/SouthwestAir/",
-    "rootResharedPost": null,
-    "byline": null,
-    "disclaimerLabel": null,
-    "pageName": "Southwest Airlines",
-    "pageProfilePictureUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825267666_1422141613326397_1267837410890325095_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=W-hENGbgjBAQ7kNvwFxQsA0&_nc_oc=AdosG_I1YDPunXwp94i_JREoB9flHeAkWoZ52opWaY5jDGa6xwCDfXH5m6S8sxxM018&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTZLESwRBALsMqXCVFReMROROPW5UDmSy56sGjbWqys6w&oe=6AFD2B8A",
-    "event": null,
-    "caption": "Southwest.com",
-    "ctaText": "Book now",
-    "cards": [
-      {
-        "body": "",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
-        "title": null,
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825351044_1838668903974457_7517957191052434586_n.jpg?_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=3dZ6Gr1NDWYQ7kNvwFuekIB&_nc_oc=AdrdqEczgJBx4yChGe6j28VaNk1gG1_c31QsZojHMPxtWD29iG39VrtGxoDtE_qvjP4&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTlrLoyhVIKCLqGIaxfz6bbuYBWWvGfXri5ZGVHNgH7LA&oe=6AFD5507",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825266759_1059017547152514_7964500183641017660_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=UJ3ZMElHe9gQ7kNvwGr4K-9&_nc_oc=AdrV7KCO0KJuULanEdowECsqWtBHBhzkvSlexrtKXj8DBkVpBacKJRtXnJeNzt4f0Bk&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQS3mBnLgWBrunxB-w5kXPYOdr-D5CHMNdqd0sJwWw80PA&oe=6AFD43CE",
-        "watermarkedResizedImageUrl": ""
-      },
-      {
-        "body": "Drop everything and Enter Airplane Mode.",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
-        "title": "Hit your Booking Point™?",
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825350878_1454262923528294_5191651861800416462_n.jpg?_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=dBCB57P-fPEQ7kNvwH6zIUC&_nc_oc=Adoab8l_S8EgjeCp7bGrdLyIdmnt1SShuSU3utZdTWl8HIoqhB592tqJkbCwPEpQU2w&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ81kp8unZw7EIiyAuHrFh3GVyKHhuYNXeW9fj7wSmPuw&oe=6AFD4FB2",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825326790_1631467005282008_3417022531276537856_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qiGgJ1YxkgMQ7kNvwE5-lEC&_nc_oc=Adri6XoFPw18k3IFVbsCN9FmM2x-nD7-Xavtxl3mDt17yIklkc7YKKGbAhP5gYDT8oQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ2XQJiYaotwRcNxYcBSXA04-6CbQJ0cBTcJBh6oa7P5Q&oe=6AFD2A1D",
-        "watermarkedResizedImageUrl": ""
-      },
-      {
-        "body": "Drop everything and Enter Airplane Mode.",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
-        "title": "Hit your Booking Point™?",
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825351740_1270207988563951_2483620804976389087_n.jpg?_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=f5DS6V3uJ18Q7kNvwF5xofN&_nc_oc=AdpxaPzM-p3ng3oL9A4RTmUTHBplQejZrNvEpF6ezptTY_Au3MZho8VIGzP6F4RnZ54&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQTY2wJLFUqh8MnUu9_fzYNmyc63M7Z8g6qP8FojhrBMgw&oe=6AFD49C0",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825267591_1774592313757762_8589362282593481338_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=SbntVya_mFQQ7kNvwFmTwP_&_nc_oc=AdreWkxXZ78gsK3paHD7JCLT6wRng-HPrmRNYme2mpnUznYze27pDAwq0iHcYw4WL48&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ88tJQUuC9C8Ey6i_cnjx76EO1r1TlJAWmbU1hXuKrow&oe=6AFD54C4",
-        "watermarkedResizedImageUrl": ""
-      },
-      {
-        "body": "Drop everything and Enter Airplane Mode.",
-        "ctaType": "BOOK_TRAVEL",
-        "caption": "Southwest.com",
-        "linkDescription": "Ready to book?",
-        "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
-        "title": "Hit your Booking Point™?",
-        "ctaText": "Book Now",
-        "videoHdUrl": null,
-        "videoPreviewImageUrl": null,
-        "videoSdUrl": null,
-        "watermarkedVideoHdUrl": null,
-        "watermarkedVideoSdUrl": null,
-        "imageCrops": [],
-        "originalImageUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/825350878_1454262923528294_5191651861800416462_n.jpg?_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=dBCB57P-fPEQ7kNvwH6zIUC&_nc_oc=Adoab8l_S8EgjeCp7bGrdLyIdmnt1SShuSU3utZdTWl8HIoqhB592tqJkbCwPEpQU2w&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ81kp8unZw7EIiyAuHrFh3GVyKHhuYNXeW9fj7wSmPuw&oe=6AFD4FB2",
-        "resizedImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/825326790_1631467005282008_3417022531276537856_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=qiGgJ1YxkgMQ7kNvwE5-lEC&_nc_oc=Adri6XoFPw18k3IFVbsCN9FmM2x-nD7-Xavtxl3mDt17yIklkc7YKKGbAhP5gYDT8oQ&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQQ2XQJiYaotwRcNxYcBSXA04-6CbQJ0cBTcJBh6oa7P5Q&oe=6AFD2A1D",
-        "watermarkedResizedImageUrl": ""
-      }
-    ],
-    "body": {
-      "text": "Drop everything and Enter Airplane Mode."
-    },
-    "ctaType": "BOOK_TRAVEL",
-    "displayFormat": "DCO",
-    "linkDescription": "Ready to book?",
-    "linkUrl": "https://www.southwest.com/?src=SOCL_sf_29390",
-    "images": [],
-    "pageCategories": [
-      "Travel Company"
-    ],
-    "pageLikeCount": 6298695,
-    "title": "Hit your Booking Point™?",
-    "videos": [],
-    "isReshared": false,
-    "extraLinks": [],
-    "extraTexts": [],
-    "extraImages": [],
-    "extraVideos": [],
-    "countryIsoCode": null,
-    "brazilTaxId": null,
-    "additionalInfo": null,
-    "ecCertificates": []
+   "branded_content": null,
+   "page_id": "1647795985469904",
+   "page_is_deleted": false,
+   "page_profile_uri": "https://www.facebook.com/LosDentistasTorreon/",
+   "root_reshared_post": null,
+   "byline": null,
+   "disclaimer_label": null,
+   "page_name": "Los Dentistas Torreón",
+   "page_profile_picture_url": "https://scontent.fopo2-2.fna.fbcdn.net/v/t39.35426-6/575882361_1852062955411136_1288455918468181698_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=10hJdIy4BbgQ7kNvwHt2RX4&_nc_oc=Adr4G4mhbpLOCBZ4bUzPKV_ojaRdS59AWGs9utzzDQOYEs0ZsKUjfODMdOZyxT016rE&_nc_zt=14&_nc_ht=scontent.fopo2-2.fna&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&oh=00_AQT9pb3u0INxjYvHsDQDBC4T1MS2iTZ9pCi3ecJTIgtmHg&oe=6AFD56E5",
+   "event": null,
+   "caption": "api.whatsapp.com",
+   "cta_text": "Send WhatsApp message",
+   "cards": [],
+   "body": {
+    "text": "Puedes continuar tu tratamiento de brackets con nosotros, ven a tu cita de valoración, en Los Dentistas es ✨COMPLETAMENTE GRATIS✨ \n\nAgenda una cita en cualquiera de nuestras clínicas 📍\n\n✅ Messenger: m.me/LosDentistasTorreon\n📱Wpp: 8714660265 | bit.ly/WPPlosdentistasNoreste \n\n#TuAtenciónaBajoCosto solo con 𝐋𝐨𝐬 𝐃𝐞𝐧𝐭𝐢𝐬𝐭𝐚𝐬 🦷✨\n#dentistatorreon #bracketsmetalicos #bracketstorreon"
+   },
+   "cta_type": "WHATSAPP_MESSAGE",
+   "display_format": "VIDEO",
+   "link_description": null,
+   "link_url": "https://api.whatsapp.com/send",
+   "images": [],
+   "page_categories": [
+    "Dentist"
+   ],
+   "page_like_count": 67071,
+   "title": null,
+   "videos": [
+    {
+     "video_hd_url": "https://video.fopo2-2.fna.fbcdn.net/o1/v/t2/f2/m86/AQN8A_HJWt11dw_lbK_cVSfESNvm5BSpBVGw-3ucPfsayt2LR9jdHPfEZavq5syLj723bVxSnZQuUbr1-5jnpB3JqmF-oCazZhcl3xQ.mp4?_nc_cat=109&_nc_oc=AdqyUua2V_5Bj8SSskur4j0l8uz13qnIOl5crs9Nbxz3A9UKcpq1rxPqgrmbasUX4Jk&_nc_sid=b66105&_nc_ht=video.fopo2-2.fna.fbcdn.net&_nc_ohc=Y9f1Evuj4gAQ7kNvwFPAwG4&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTM1MTg0NzE2MjgyODE5NSwiYXNzZXRfYWdlX2RheXMiOjM3NCwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjI4LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=d41915b385a981d0&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9FMDRGNjczOEJBRkNDNkFFMTQxNjU1RTBEMDZCNUI5NV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYR2lnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8xMTM4MDU1ODY4NTIxMjA4XzE4OTM2MDE0MzY0NTI1MzU1OTQubXA0FQICyAESACgAGAAbA4gHdXNlX29pbAExEnByb2dyZXNzaXZlX3JlY2lwZQExEmNvcHlfc2FtcGxlX2dyb3VwcwExFQAAJsbW8p7u3-YEFQIoAkMzLBdAPEQYk3S8ahgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AGXmnQEA&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&_nc_map=urlgen_bucketless&_nc_zt=28&_nc_enc=UtNqyqRUtlsQNGyz5QyV1YJl5qiCRJI8kCU6faAYDIS4AipkVl5_DK-jG25RKRkujlP85QpChnO_7VnARN9nB1JcCJp8rgUu_TF2Fyk4hf-kl7TZxX1kzfZzWU8&oh=00_AQQk6HkKJAc5D4Bnk7pvI4PxkRTmSGmcMj3dC_G5AJCR3Q&oe=6AF97486",
+     "video_preview_image_url": "https://scontent.fopo6-1.fna.fbcdn.net/v/t39.35426-6/575867268_811205891724624_8105385263885833362_n.jpg?_nc_cat=108&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=_XsI--Y4uDkQ7kNvwH7_hlO&_nc_oc=AdpUHW-6lacy3yWrTTcLrpxlhTD4gRBO0YU9H-WH1eFI46mqOaLTmrG1j-nLdh4B6sA&_nc_zt=14&_nc_ht=scontent.fopo6-1.fna&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&oh=00_AQTMKvft-yCPnswImstsWNlaZB97Mb57RLI2aVO3G1IGFg&oe=6AFD4AE8",
+     "video_sd_url": "https://video.fopo6-2.fna.fbcdn.net/o1/v/t2/f2/m86/AQOTrkSfYB0cIsvRoytm0iif9Ty9HgHTQgNGSg43zGUUq8URsojtRvMFUleOimDToy3FvTTbTwXAj1erUVE1udQxZTozgZb24JeUz8c.mp4?_nc_cat=101&_nc_oc=AdrC6LGy-KTSszQU0uQXQVz3sceya5ii6_NEkoHr5Faua2vTYEGyHIlg04flRaFdV5o&_nc_sid=b66105&_nc_ht=video.fopo6-2.fna.fbcdn.net&_nc_ohc=fxAwxtKKyDQQ7kNvwG0uril&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLmRhc2hfYmFzZWxpbmVfM192MSIsInhwdl9hc3NldF9pZCI6MTM1MTg0NzE2MjgyODE5NSwiYXNzZXRfYWdlX2RheXMiOjM3NCwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjI4LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=311b2d9da33201b1&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8xODREQzMwMzJEQUMzN0QzQ0M1Mzg1QzEzRUJDNEU5Rl92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYR2lnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8xMTM4MDU1ODY4NTIxMjA4XzE4OTM2MDE0MzY0NTI1MzU1OTQubXA0FQICyAESACgAGAAbA4gHdXNlX29pbAExEnByb2dyZXNzaXZlX3JlY2lwZQExEmNvcHlfc2FtcGxlX2dyb3VwcwExFQAAJsbW8p7u3-YEFQIoAkMzLBdAPEQYk3S8ahgSZGFzaF9iYXNlbGluZV8zX3YxEQB1AGXmnQEA&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&_nc_map=urlgen_bucketless&_nc_zt=28&_nc_enc=Urj70Jvr72kxy8ow6VWZQPLLn8cLUjVO9gwARR2H28QuDLteOwj1yAwuup6TpsCsIzlM11VxtMZTe7wYQrJALmgcChejSjwwLwm9kXWXaObaIfnaJz6aprYDxPk&oh=00_AQSkeGbXTwR2xd-RK3me-eaLmhql54hswKWbc9f_UVY7oQ&oe=6AF944A2",
+     "watermarked_video_hd_url": null,
+     "watermarked_video_sd_url": null
+    }
+   ],
+   "is_reshared": false,
+   "extra_links": [],
+   "extra_texts": [],
+   "extra_images": [],
+   "extra_videos": [],
+   "country_iso_code": null,
+   "brazil_tax_id": null,
+   "additional_info": null,
+   "ec_certificates": []
   },
-  "isActive": true,
-  "hasUserReported": false,
-  "reportCount": null,
-  "menuItems": [],
-  "stateMediaRunLabel": null,
-  "pageIsDeleted": false,
-  "pageName": "Southwest Airlines",
-  "impressionsWithIndex": {
-    "impressionsText": null,
-    "impressionsIndex": -1
+  "has_user_reported": false,
+  "report_count": null,
+  "menu_items": [],
+  "state_media_run_label": null,
+  "page_name": "Los Dentistas Torreón",
+  "impressions_with_index": {
+   "impressions_text": null,
+   "impressions_index": -1
   },
-  "gatedType": "ELIGIBLE",
+  "gated_type": "ELIGIBLE",
   "categories": [
-    "UNKNOWN"
+   "UNKNOWN"
   ],
-  "isAaaEligible": false,
-  "containsDigitalCreatedMedia": false,
-  "reachEstimate": null,
+  "is_aaa_eligible": false,
+  "contains_digital_created_media": false,
+  "reach_estimate": null,
   "currency": "",
   "spend": null,
-  "endDate": 1794556800,
-  "publisherPlatform": [
-    "FACEBOOK",
-    "INSTAGRAM",
-    "AUDIENCE_NETWORK"
+  "end_date": 1794556800,
+  "publisher_platform": [
+   "FACEBOOK",
+   "INSTAGRAM",
+   "AUDIENCE_NETWORK",
+   "MESSENGER"
   ],
-  "startDate": 1791183600,
-  "containsSensitiveContent": false,
-  "totalActiveTime": null,
-  "regionalRegulationData": {
-    "finserv": {
-      "isDeemedFinserv": false,
-      "isLimitedDelivery": false
-    },
-    "twAntiScam": {
-      "isLimitedDelivery": false
-    }
+  "start_date": 1762329600,
+  "contains_sensitive_content": false,
+  "total_active_time": null,
+  "regional_regulation_data": {
+   "finserv": {
+    "is_deemed_finserv": false,
+    "is_limited_delivery": false
+   },
+   "tw_anti_scam": {
+    "is_limited_delivery": false
+   }
   },
-  "hideDataStatus": "NONE",
-  "fevInfo": null,
-  "adId": null,
-  "targetedOrReachedCountries": []
-},
-{
-  "inputUrl": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=dentist&search_type=keyword_unordered&media_type=all",
-  "pageInfo": {
-    "adLibrarySystemStatus": {
-      "systemStatus": {
-        "status": "NO_KNOWN_ISSUES",
-        "activeIssues": [
-          {
-            "product": "Ad Library",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Ad Library Report",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Ad Library API",
-            "status": "NO_KNOWN_ISSUES"
-          },
-          {
-            "product": "Branded Content",
-            "status": "NO_KNOWN_ISSUES"
-          }
-        ]
-      }
-    },
-    "xfbAdLibraryIsCaptchaRequired": false,
-    "page": null,
-    "adLibraryUser": null
-  },
-  "pageID": "1664080403827654",
-  "adArchiveID": "1051944533495459",
-  "startDateFormatted": "2025-05-07T07:00:00.000Z",
-  "endDateFormatted": "2026-11-13T08:00:00.000Z",
-  "adArchiveId": "1051944533495459",
-  "collationCount": 1,
-  "collationId": "714912444410648",
-  "pageId": "1664080403827654",
+  "hide_data_status": "NONE",
+  "fev_info": null,
+  "ad_id": null,
+  "targeted_or_reached_countries": [],
+  "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=MX&q=dentista&search_type=keyword_unordered&media_type=all",
+  "total": 10001,
+  "position": 4,
+  "ads_count": 1,
+  "start_date_formatted": "2025-11-05 08:00:00",
+  "end_date_formatted": "2026-11-13 08:00:00",
+  "ad_library_url": "https://www.facebook.com/ads/library/?id=26077794028477842"
+ },
+ {
+  "ad_archive_id": "253916896973901",
+  "collation_count": 1,
+  "collation_id": "1559904997832651",
+  "is_active": true,
+  "page_id": "406380953443426",
+  "page_is_deleted": false,
   "snapshot": {
-    "brandedContent": null,
-    "pageId": "1664080403827654",
-    "pageIsDeleted": false,
-    "pageProfileUri": "https://www.facebook.com/levydentistry/",
-    "rootResharedPost": null,
-    "byline": null,
-    "disclaimerLabel": null,
-    "pageName": "Levy Goldman Dentistry",
-    "pageProfilePictureUrl": "https://scontent-sea5-2.xx.fbcdn.net/v/t39.35426-6/495691473_1022070079506557_6733230835754100626_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=Dl-it9k2X0sQ7kNvwES3WTu&_nc_oc=AdrN9t70cTjeQjCuDhAMFTtLCfy8A5YwkDHBQ9pzJhbyYhU-2QLuRdYkDKAl8raWcfU&_nc_zt=14&_nc_ht=scontent-sea5-2.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQS5l2B0hlI88wVZ-qykgVCG7IPeg5ihIyV8bCP7fxxjnA&oe=6AFD4EDB",
-    "event": null,
-    "caption": "instagram.com",
-    "ctaText": "Visit Instagram profile",
-    "cards": [],
-    "body": {
-      "text": "The truth about veneers is that they can look super natural.\n\nThe truth about veneers is that they can look like an enhanced version of YOUR NATURAL SMILE.\n\nThe truth about veneers is that you don’t always have to shave down your teeth.\n\nThe truth about veneers is that you need to find a dentist that loves doing them and that uses a highly skilled lab that creates dental art, not just slabs of porcelain."
-    },
-    "ctaType": "VIEW_INSTAGRAM_PROFILE",
-    "displayFormat": "VIDEO",
-    "linkDescription": null,
-    "linkUrl": "http://instagram.com/dr.naomigoldman",
-    "images": [],
-    "pageCategories": [
-      "Cosmetic Dentist"
-    ],
-    "pageLikeCount": 1362,
-    "title": null,
-    "videos": [
-      {
-        "videoHdUrl": "https://video-sea5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQOsARLZzV6Z9vMhDPw_UoCHpyoi45VU4mJVcezHT5hhVE20CokYLgVVe8-US_t83xfb9P0HaN4n1s4u2dAh4qh9.mp4?_nc_cat=103&_nc_sid=ef5aa3&_nc_ht=video-sea5-1.xx.fbcdn.net&_nc_ohc=1PE6rFD0f3gQ7kNvwHr_pw5&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuNzIwLmFzaWNfaHEyX2hkX3Byb2dyZXNzaXZlIiwieHB2X2Fzc2V0X2lkIjoxMDY3ODIyNzY1MzYxNzE5LCJhc3NldF9hZ2VfZGF5cyI6MzU4LCJ2aV91c2VjYXNlX2lkIjoxMDY4MCwiZHVyYXRpb25fcyI6NjUsIndhdGNoX3RpbWVfcyI6MCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&_nc_map=urlgen_bucketless&_nc_zt=28&oh=00_AQTuEZwCV68Tgf6y8JKQZR8sAfK1NV1-HUrUgy6IddW6ng&oe=6AFD4D8C",
-        "videoPreviewImageUrl": "https://scontent-sea5-1.xx.fbcdn.net/v/t39.35426-6/495389881_1022720536480287_2160565059732714719_n.jpg?_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=zPKhmeVc1oMQ7kNvwFO4DDI&_nc_oc=AdpONfQsOou8G2cfpl6YiJ7W7OJ8xQNFti-Vl04lhjPiZGt5-7k9V1xBmX4QLkCPBKU&_nc_zt=14&_nc_ht=scontent-sea5-1.xx&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&oh=00_AQR9oqEYHbI_9oR0eTwj98-rCredRyxDUrLP8c-OgEEtHg&oe=6AFD3518",
-        "videoSdUrl": "https://video-sea5-2.xx.fbcdn.net/o1/v/t2/f2/m412/AQMTsn9zegrezt6_s1KQ2WcdtdwKDIfTHVbY_Z8GL1a7cm8wuWhyEfnh2Ndy7KDMBG90qwJ7bfEfzRsvLZSCtnst.mp4?_nc_cat=108&_nc_sid=ef5aa3&_nc_ht=video-sea5-2.xx.fbcdn.net&_nc_ohc=9VKL98q5I8IQ7kNvwFvFVXG&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLmFzaWNfaHExX3NkX3Byb2dyZXNzaXZlIiwieHB2X2Fzc2V0X2lkIjoxMDY3ODIyNzY1MzYxNzE5LCJhc3NldF9hZ2VfZGF5cyI6MzU4LCJ2aV91c2VjYXNlX2lkIjoxMDY4MCwiZHVyYXRpb25fcyI6NjUsIndhdGNoX3RpbWVfcyI6MCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&_nc_gid=f6rtol7VkTHxaYqC9yh2SQ&_nc_ss=70289&_nc_map=urlgen_bucketless&_nc_zt=28&oh=00_AQRWQEbK_qbwb3wF-lYUK-nKDlWi0YNF94S8jwsycShclQ&oe=6AFD2EFD",
-        "watermarkedVideoHdUrl": "",
-        "watermarkedVideoSdUrl": ""
-      }
-    ],
-    "isReshared": false,
-    "extraLinks": [],
-    "extraTexts": [],
-    "extraImages": [],
-    "extraVideos": [],
-    "countryIsoCode": null,
-    "brazilTaxId": null,
-    "additionalInfo": null,
-    "ecCertificates": []
+   "branded_content": null,
+   "page_id": "406380953443426",
+   "page_is_deleted": false,
+   "page_profile_uri": "https://www.facebook.com/DentalMedranoDelicias/",
+   "root_reshared_post": null,
+   "byline": null,
+   "disclaimer_label": null,
+   "page_name": "Dental Medrano",
+   "page_profile_picture_url": "https://scontent.fopo6-1.fna.fbcdn.net/v/t39.35426-6/336650531_1967148560294941_5355145025603034492_n.jpg?stp=dst-jpg_s60x60_tt6&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=CNjhV75a7LoQ7kNvwE-DWRx&_nc_oc=AdpQrWd44dz_wWKNWSpiH0pNahVqcWw2dlgOzcDy35eliqLo9p90RSYd7DRSUGBL8Fk&_nc_zt=14&_nc_ht=scontent.fopo6-1.fna&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&oh=00_AQS8p-i4lSNcByb3qwz92sGRhIz_UK_p1VaYYWbpJ7kESg&oe=6AFD67A9",
+   "event": null,
+   "caption": null,
+   "cta_text": "Send message",
+   "cards": [],
+   "body": {
+    "text": "CONOCE NUESTROS SERVICIOS"
+   },
+   "cta_type": "MESSAGE_PAGE",
+   "display_format": "IMAGE",
+   "link_description": "En clínica Dental Medrano, contamos con varias especialidades para tu salud bucal, descubre una nueva sonrisa y visítanos o llama a los números establecidos y agenda tu cita.",
+   "link_url": null,
+   "images": [
+    {
+     "image_crops": [],
+     "original_image_url": "https://scontent.fopo6-2.fna.fbcdn.net/v/t39.35426-6/336662391_585879256819355_7845595949085572284_n.jpg?_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=gQuUUgTgBwoQ7kNvwGDucOy&_nc_oc=AdprnC493pXAScyZWN_uiojxKsqX1H7DuutXbg9SXb3QuQ39Q-ahq25W6HANWGYKFqI&_nc_zt=14&_nc_ht=scontent.fopo6-2.fna&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&oh=00_AQSA6indJuaMh8MCe7VOXLfV8IKtyONpDwGCznXARH9Gxg&oe=6AFD4BCD",
+     "resized_image_url": "https://scontent.fopo2-2.fna.fbcdn.net/v/t39.35426-6/336652909_542044547796612_800443353536664633_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=pLd2jd-wF1YQ7kNvwFi-Xpp&_nc_oc=AdrP9AQ57ZtQDVlNVG0GdgCHb55gke5EJ5edinNq2qRI-nkXNqH2pjaxJbm56SuQRkw&_nc_zt=14&_nc_ht=scontent.fopo2-2.fna&_nc_gid=Tdj_OevEVF13Dwvo0xO9HQ&_nc_ss=78180&oh=00_AQSIL2kw_Hqln7W2LRIDVGaINKdxMN1gU9opaQvt0_Gj5g&oe=6AFD6C71",
+     "watermarked_resized_image_url": ""
+    }
+   ],
+   "page_categories": [
+    "Dentist",
+    "Oral Surgeon"
+   ],
+   "page_like_count": 3986,
+   "title": "Dental Medrano",
+   "videos": [],
+   "is_reshared": false,
+   "extra_links": [],
+   "extra_texts": [],
+   "extra_images": [],
+   "extra_videos": [],
+   "country_iso_code": null,
+   "brazil_tax_id": null,
+   "additional_info": null,
+   "ec_certificates": []
   },
-  "isActive": true,
-  "hasUserReported": false,
-  "reportCount": null,
-  "menuItems": [],
-  "stateMediaRunLabel": null,
-  "pageIsDeleted": false,
-  "pageName": "Levy Goldman Dentistry",
-  "impressionsWithIndex": {
-    "impressionsText": null,
-    "impressionsIndex": -1
+  "has_user_reported": false,
+  "report_count": null,
+  "menu_items": [],
+  "state_media_run_label": null,
+  "page_name": "Dental Medrano",
+  "impressions_with_index": {
+   "impressions_text": null,
+   "impressions_index": -1
   },
-  "gatedType": "ELIGIBLE",
+  "gated_type": "ELIGIBLE",
   "categories": [
-    "UNKNOWN"
+   "UNKNOWN"
   ],
-  "isAaaEligible": true,
-  "containsDigitalCreatedMedia": false,
-  "reachEstimate": null,
+  "is_aaa_eligible": false,
+  "contains_digital_created_media": false,
+  "reach_estimate": null,
   "currency": "",
   "spend": null,
-  "endDate": 1794556800,
-  "publisherPlatform": [
-    "FACEBOOK",
-    "INSTAGRAM"
+  "end_date": 1778050800,
+  "publisher_platform": [
+   "FACEBOOK",
+   "INSTAGRAM",
+   "AUDIENCE_NETWORK",
+   "MESSENGER"
   ],
-  "startDate": 1746601200,
-  "containsSensitiveContent": false,
-  "totalActiveTime": null,
-  "regionalRegulationData": {
-    "finserv": {
-      "isDeemedFinserv": false,
-      "isLimitedDelivery": false
-    },
-    "twAntiScam": {
-      "isLimitedDelivery": false
-    }
+  "start_date": 1678950000,
+  "contains_sensitive_content": false,
+  "total_active_time": null,
+  "regional_regulation_data": {
+   "finserv": {
+    "is_deemed_finserv": false,
+    "is_limited_delivery": false
+   },
+   "tw_anti_scam": {
+    "is_limited_delivery": false
+   }
   },
-  "hideDataStatus": "NONE",
-  "fevInfo": null,
-  "adId": null,
-  "targetedOrReachedCountries": []
-}]
+  "hide_data_status": "NONE",
+  "fev_info": null,
+  "ad_id": null,
+  "targeted_or_reached_countries": [],
+  "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=MX&q=dentista&search_type=keyword_unordered&media_type=all",
+  "total": 10001,
+  "position": 2,
+  "ads_count": 1,
+  "start_date_formatted": "2023-03-16 07:00:00",
+  "end_date_formatted": "2026-05-06 07:00:00",
+  "ad_library_url": "https://www.facebook.com/ads/library/?id=253916896973901"
+ }
+]

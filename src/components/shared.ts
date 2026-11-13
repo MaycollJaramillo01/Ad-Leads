@@ -28,6 +28,9 @@ export interface Search extends Record<string, unknown> {
   error: string | null;
   created_at: string;
   finished_at: string | null;
+  cancel_requested: boolean;
+  /** False until Apify has closed the bill for its runs (about a minute after finishing). */
+  cost_final: boolean;
 }
 
 export interface Advertiser extends Record<string, unknown> {
@@ -87,6 +90,8 @@ export interface Stats {
   costUsd: number;
   byStatus: {status: LeadStatus; n: number}[];
   topCountries: {country: string; n: number}[];
+  /** The server asks for a password (APP_PASSWORD set), so offer to sign out. */
+  auth: boolean;
 }
 
 // ============= FETCH =============
@@ -97,6 +102,7 @@ export async function api<T>(url: string, init?: {method?: string; body?: unknow
     headers: init?.body ? {'Content-Type': 'application/json'} : undefined,
     body: init?.body ? JSON.stringify(init.body) : undefined,
   });
+  if (res.status === 401) location.href = `/login?next=${encodeURIComponent(location.pathname + location.search)}`; // session expired
   const data = await res.json().catch(() => ({error: `Error ${res.status}`}));
   if (!res.ok) throw new Error(data.error ?? `Error ${res.status}`);
   return data as T;
@@ -194,6 +200,5 @@ export function duration(fromIso: string, toIso: string | null): string {
   return m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : m > 0 ? `${m} min ${s % 60} s` : `${s} s`;
 }
 
-// Apify Free-plan list prices; the real cost comes back from each run.
-export const PRICE_PER_AD = 0.0058;
-export const PRICE_PER_PAGE = 0.012;
+// Apify list prices of the actors the server uses; the real cost comes back from each run.
+export {MIN_ADS_PER_RUN, PRICE_PER_AD, PRICE_PER_PAGE} from '../lib/scrape';

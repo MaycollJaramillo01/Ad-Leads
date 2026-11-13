@@ -1,9 +1,8 @@
 // Server-only: the token never reaches the browser.
-const API = 'https://api.apify.com/v2';
-const TERMINAL = new Set(['SUCCEEDED', 'FAILED', 'ABORTED', 'TIMED-OUT']);
+import {createHash} from 'node:crypto';
 
-export const ADS_ACTOR = 'apify~facebook-ads-scraper';
-export const PAGES_ACTOR = 'apify~facebook-pages-scraper';
+const API = 'https://api.apify.com/v2';
+export const TERMINAL = new Set(['SUCCEEDED', 'FAILED', 'ABORTED', 'TIMED-OUT']);
 
 export interface Run {
   id: string;
@@ -14,24 +13,46 @@ export interface Run {
 }
 
 function token(): string {
-  const t = process.env.APIFY_TOKEN ?? import.meta.env?.APIFY_TOKEN;
-  if (!t) throw new Error('Falta APIFY_TOKEN en el archivo .env');
+  const t = process.env.APIFY_TOKEN;
+  if (!t) throw new Error('Falta APIFY_TOKEN en las variables de entorno');
   return t;
 }
 
+/** Secret part of our webhook URL, derived from the token so there is no extra setting. */
+export const webhookKey = () => createHash('sha256').update(`adleads-webhook:${token()}`).digest('hex').slice(0, 32);
+
+/** Network hiccups and Apify 5xx/429: worth retrying on the next tick, not failing a paid search. */
+export class TransientError extends Error {}
+
 async function call(path: string, init?: RequestInit) {
-  const res = await fetch(`${API}${path}`, {
-    ...init,
-    headers: {Authorization: `Bearer ${token()}`, 'Content-Type': 'application/json'},
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API}${path}`, {
+      ...init,
+      headers: {Authorization: `Bearer ${token()}`, 'Content-Type': 'application/json'},
+    });
+  } catch (e) {
+    throw new TransientError(`No se pudo contactar con Apify: ${(e as Error).message}`);
+  }
   const body = await res.json().catch(() => null);
-  if (!res.ok) throw new Error(body?.error?.message ?? `Apify respondió ${res.status}`);
+  if (!res.ok) {
+    const message = body?.error?.message ?? `Apify respondió ${res.status}`;
+    throw res.status === 429 || res.status >= 500 ? new TransientError(message) : new Error(message);
+  }
   return body;
 }
 
-export async function startRun(actor: string, input: unknown): Promise<Run> {
-  return (await call(`/acts/${actor}/runs`, {method: 'POST', body: JSON.stringify(input)})).data;
+/** Start an actor run. With `webhookUrl`, Apify calls it once the run ends (any outcome). */
+export async function startRun(actor: string, input: unknown, webhookUrl?: string | null): Promise<Run> {
+  const hooks = webhookUrl
+    ? `?webhooks=${encodeURIComponent(
+        btoa(JSON.stringify([{eventTypes: ['ACTOR.RUN.SUCCEEDED', 'ACTOR.RUN.FAILED', 'ACTOR.RUN.ABORTED', 'ACTOR.RUN.TIMED_OUT'], requestUrl: webhookUrl}])),
+      )}`
+    : '';
+  return (await call(`/acts/${actor}/runs${hooks}`, {method: 'POST', body: JSON.stringify(input)})).data;
 }
+
+export const getRun = async (runId: string): Promise<Run> => (await call(`/actor-runs/${runId}`)).data;
 
 export async function abortRun(runId: string) {
   await call(`/actor-runs/${runId}/abort`, {method: 'POST'}).catch(() => {});
@@ -41,24 +62,5 @@ export async function datasetCount(datasetId: string): Promise<number> {
   return (await call(`/datasets/${datasetId}`)).data?.itemCount ?? 0;
 }
 
-/** Poll until the run ends, reporting dataset size along the way. */
-export async function waitRun(runId: string, onProgress?: (items: number) => void, shouldStop?: () => boolean): Promise<Run> {
-  let run: Run = (await call(`/actor-runs/${runId}`)).data;
-  while (!TERMINAL.has(run.status)) {
-    if (shouldStop?.()) {
-      await abortRun(runId);
-    }
-    run = (await call(`/actor-runs/${runId}?waitForFinish=10`)).data;
-    if (onProgress) onProgress(await datasetCount(run.defaultDatasetId).catch(() => 0));
-  }
-  return run;
-}
-
-export async function runItems<T = any>(run: Run): Promise<T[]> {
-  const out: T[] = [];
-  for (let offset = 0; ; offset += 1000) {
-    const page: T[] = await call(`/datasets/${run.defaultDatasetId}/items?clean=true&format=json&offset=${offset}&limit=1000`);
-    out.push(...page);
-    if (page.length < 1000) return out;
-  }
-}
+export const datasetItems = <T = any>(datasetId: string, offset: number, limit = 1000): Promise<T[]> =>
+  call(`/datasets/${datasetId}/items?clean=true&format=json&offset=${offset}&limit=${limit}`);

@@ -13,7 +13,7 @@ import {Heading, Text} from '@astryxdesign/core/Text';
 import {TextInput} from '@astryxdesign/core/TextInput';
 import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 
-import {COUNTRY_OPTIONS, MEDIA_OPTIONS, PRICE_PER_AD, PRICE_PER_PAGE, REGIONS, api, num, usd, type Search} from './shared';
+import {COUNTRY_OPTIONS, MEDIA_OPTIONS, MIN_ADS_PER_RUN, PRICE_PER_AD, PRICE_PER_PAGE, REGIONS, api, num, usd, type Search} from './shared';
 
 const ALL_OPTION = {value: 'ALL', label: 'Todos los países'};
 const OPTIONS = [ALL_OPTION, {type: 'divider' as const}, ...COUNTRY_OPTIONS];
@@ -68,7 +68,7 @@ export function NewSearchForm() {
           activeStatus: s.active_status as FormState['activeStatus'],
           mediaType: s.media_type,
           newerThan: s.newer_than ?? undefined,
-          limit: s.results_limit,
+          limit: Math.max(s.results_limit, MIN_ADS_PER_RUN),
           enrich: s.enrich,
           exact: s.exact,
         });
@@ -184,7 +184,10 @@ export function NewSearchForm() {
           <NumberInput
             label={isUrl ? 'Máximo de anuncios' : 'Anuncios por país'}
             value={f.limit}
-            onChange={v => set('limit', Math.min(Math.max(Math.round(v) || 1, 1), 2000))}
+            onChange={v => set('limit', Math.min(Math.max(Math.round(v) || MIN_ADS_PER_RUN, MIN_ADS_PER_RUN), 2000))}
+            min={MIN_ADS_PER_RUN}
+            max={2000}
+            labelTooltip={`Mínimo ${MIN_ADS_PER_RUN}: Apify no acepta búsquedas más pequeñas.`}
             width={170}
           />
         </HStack>

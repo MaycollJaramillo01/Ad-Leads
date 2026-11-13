@@ -167,7 +167,13 @@ export function SearchDetailView({id}: {id: number}) {
               <Figure
                 label="Costo en Apify"
                 value={usd(search.cost_usd)}
-                hint={search.cached_count > 0 ? `${num.format(search.cached_count)} páginas ya estaban en caché` : undefined}
+                hint={
+                  running || !search.cost_final
+                    ? 'Provisional: Apify cierra la cuenta ~1 min después de terminar'
+                    : search.cached_count > 0
+                      ? `${num.format(search.cached_count)} páginas ya estaban en caché`
+                      : 'Cobro real de Apify'
+                }
               />
             </Grid>
 

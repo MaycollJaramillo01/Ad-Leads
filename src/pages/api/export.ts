@@ -4,8 +4,8 @@ import {allAdvertisers} from '../../lib/db';
 import {parseFilter} from '../../lib/http';
 
 /** Same filters as /api/advertisers, every matching row, as a CSV download. */
-export const GET: APIRoute = ({url}) => {
-  const rows = allAdvertisers(parseFilter(url.searchParams));
+export const GET: APIRoute = async ({url}) => {
+  const rows = await allAdvertisers(parseFilter(url.searchParams));
   const name = (url.searchParams.get('filename') ?? 'anunciantes').replace(/[^\p{L}\p{N}_-]+/gu, '-').slice(0, 60) || 'anunciantes';
   return new Response(advertisersCsv(rows), {
     headers: {

@@ -1,12 +1,12 @@
 import type {APIRoute} from 'astro';
 import {createSearch, listSearches} from '../../../lib/db';
 import {fail, json} from '../../../lib/http';
-import {pump} from '../../../lib/jobs';
-import {isFacebookUrl} from '../../../lib/scrape';
+import {kick} from '../../../lib/jobs';
+import {MIN_ADS_PER_RUN, isFacebookUrl} from '../../../lib/scrape';
 
-export const GET: APIRoute = ({url}) => {
-  pump();
-  return json({searches: listSearches(Number(url.searchParams.get('limit')) || 100)});
+export const GET: APIRoute = async ({url}) => {
+  kick();
+  return json({searches: await listSearches(Number(url.searchParams.get('limit')) || 100)});
 };
 
 const ACTIVE = ['active', 'inactive', 'all'];
@@ -26,16 +26,16 @@ export const POST: APIRoute = async ({request}) => {
   if (countries.includes('ALL') && countries.length > 1) return fail('"Todos los países" no se combina con países concretos.');
 
   const newer = typeof b.newerThan === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(b.newerThan) ? b.newerThan : null;
-  const search = createSearch({
+  const search = await createSearch({
     query,
     countries,
     active_status: ACTIVE.includes(b.activeStatus) ? b.activeStatus : 'active',
     media_type: MEDIA.includes(b.mediaType) ? b.mediaType : 'all',
     newer_than: newer,
-    results_limit: Math.min(Math.max(Math.round(Number(b.limit)) || 50, 1), 2000),
+    results_limit: Math.min(Math.max(Math.round(Number(b.limit)) || 50, MIN_ADS_PER_RUN), 2000),
     enrich: b.enrich !== false,
     exact: b.exact === true,
   });
-  pump();
+  kick();
   return json({search}, 201);
 };

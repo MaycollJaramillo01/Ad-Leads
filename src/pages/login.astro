@@ -1,0 +1,12 @@
+---
+import Page from '../layouts/Page.astro';
+import App from '../components/App';
+import {SESSION_COOKIE, isSignedIn, passwordRequired} from '../lib/auth';
+
+// Nothing to sign in to, or already in: go straight to the app.
+if (!passwordRequired() || isSignedIn(Astro.cookies.get(SESSION_COOKIE)?.value)) return Astro.redirect('/');
+---
+
+<Page title="Entrar">
+	<App client:only="react" view="login" />
+</Page>

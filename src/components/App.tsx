@@ -8,11 +8,14 @@ import {InternationalizationProvider} from '@astryxdesign/core/i18n';
 import esES from '@astryxdesign/core/locales/es-ES.generated.js';
 import {AppShell} from '@astryxdesign/core/AppShell';
 import {Badge} from '@astryxdesign/core/Badge';
+import {Button} from '@astryxdesign/core/Button';
 import {Icon} from '@astryxdesign/core/Icon';
+import {VStack} from '@astryxdesign/core/Layout';
 import {NavIcon} from '@astryxdesign/core/NavIcon';
 import {SideNav, SideNavHeading, SideNavItem, SideNavSection} from '@astryxdesign/core/SideNav';
 import {Text} from '@astryxdesign/core/Text';
 import {
+  ArrowRightStartOnRectangleIcon,
   ClockIcon as ClockOutline,
   MagnifyingGlassIcon as SearchOutline,
   UsersIcon as UsersOutline,
@@ -26,8 +29,11 @@ import {HomeView} from './HomeView';
 import {SearchesView} from './SearchesView';
 import {SearchDetailView} from './SearchDetailView';
 import {AdvertisersView} from './AdvertisersView';
+import {LoginView} from './LoginView';
 
-export type View = 'home' | 'searches' | 'search' | 'advertisers';
+export type View = 'home' | 'searches' | 'search' | 'advertisers' | 'login';
+
+const logout = () => fetch('/api/login', {method: 'DELETE'}).finally(() => (location.href = '/login'));
 
 function Shell({view, id}: {view: View; id?: number}) {
   const [stats, setStats] = useState<Stats | null>(null);
@@ -53,7 +59,12 @@ function Shell({view, id}: {view: View; id?: number}) {
           }
           footer={
             stats ? (
-              <Text type="supporting">{`Gasto total en Apify: ${new Intl.NumberFormat('es', {style: 'currency', currency: 'USD'}).format(stats.costUsd)}`}</Text>
+              <VStack gap={2} hAlign="start">
+                <Text type="supporting">{`Gasto total en Apify: ${new Intl.NumberFormat('es', {style: 'currency', currency: 'USD'}).format(stats.costUsd)}`}</Text>
+                {stats.auth && (
+                  <Button label="Cerrar sesión" variant="ghost" size="sm" icon={<Icon icon={ArrowRightStartOnRectangleIcon} />} onClick={logout} />
+                )}
+              </VStack>
             ) : undefined
           }>
           <SideNavSection title="Principal" isHeaderHidden>
@@ -88,9 +99,7 @@ function Shell({view, id}: {view: View; id?: number}) {
 export default function App(props: {view: View; id?: number}) {
   return (
     <InternationalizationProvider locale="es-ES" messages={{'es-ES': esES}}>
-      <Theme theme={themes[defaultThemeSlug]}>
-        <Shell {...props} />
-      </Theme>
+      <Theme theme={themes[defaultThemeSlug]}>{props.view === 'login' ? <LoginView /> : <Shell {...props} />}</Theme>
     </InternationalizationProvider>
   );
 }

@@ -1,10 +1,10 @@
 # AdLeads: anunciantes de la Biblioteca de anuncios de Meta
 
-App local que busca en la Biblioteca de anuncios de Meta (Facebook e Instagram), guarda cada anunciante en una base de datos propia y le añade el email, teléfono, dirección, web e Instagram que publica su página. Desde ahí se filtran, se marcan como leads y se exportan a CSV (abre bien en Excel).
+Busca en la Biblioteca de anuncios de Meta (Facebook e Instagram), guarda cada anunciante en una base de datos propia y le añade el email, teléfono, dirección, web e Instagram que publica su página. Desde ahí se filtran, se marcan como leads y se exportan a CSV (abre bien en Excel). Funciona en local o publicada en Vercel.
 
 ## Pantallas
 
-- **Nueva búsqueda** (`/`): palabra clave, frase exacta o una URL de la Ads Library o de una página de Facebook. Uno o varios países, con atajos por región (Latinoamérica, habla hispana, Norteamérica, habla inglesa, Europa) o "Todos los países". Filtros de anuncios activos o inactivos, formato y fecha de publicación, límite por país y estimación de costo antes de lanzar. Abajo, las búsquedas recientes con su progreso en vivo.
+- **Nueva búsqueda** (`/`): palabra clave, frase exacta o una URL de la Ads Library o de una página de Facebook. Uno o varios países, con atajos por región (Latinoamérica, habla hispana, Norteamérica, habla inglesa, Europa) o "Todos los países". Filtros de anuncios activos o inactivos, formato y fecha de publicación, límite por país y costo máximo estimado antes de lanzar. Abajo, las búsquedas recientes con su progreso en vivo.
 - **Historial** (`/busquedas`): todas las búsquedas con su estado, anuncios, anunciantes, porcentaje con email y costo real. Se pueden filtrar, ordenar, repetir o borrar.
 - **Detalle de búsqueda** (`/busquedas/:id`): progreso en vivo, opción de cancelar, cifras, parámetros usados y la tabla de anunciantes que encontró.
 - **Anunciantes** (`/anunciantes`): la base completa sin duplicados.
@@ -15,9 +15,9 @@ App local que busca en la Biblioteca de anuncios de Meta (Facebook e Instagram),
 
 Los filtros quedan en la URL, así que una vista filtrada se puede guardar o compartir.
 
-## Uso
+## Uso local
 
-Requiere Node 22.13 o superior (usa `node:sqlite`).
+Requiere Node 22.18 o superior.
 
 ```bash
 npm install
@@ -25,36 +25,50 @@ cp .env.example .env   # y pon tu APIFY_TOKEN
 npm run dev            # http://localhost:4321
 ```
 
-Producción:
+Sin `APP_PASSWORD` en `.env` no pide contraseña, pensado para usarla solo en tu equipo. Los datos quedan en `data/scraper.db` (se puede cambiar con `DB_PATH`).
+
+Servidor propio:
 
 ```bash
 npm run build
 npm start              # lee .env
 ```
 
-`npm run check` prueba la capa de datos sin gastar en Apify: mapeo, deduplicación, caché, filtros, orden, CSV y borrado.
+`npm run check` prueba la capa de datos sin gastar en Apify: mapeo de lo que devuelven los actores, deduplicación, caché de contactos, filtros, orden, CSV y borrado.
+
+## Publicar en Vercel
+
+El repositorio está conectado al proyecto de Vercel: cada push a `main` se publica solo.
+
+1. **Base de datos:** en Vercel, Storage → Turso (integración del Marketplace). Crea `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN` en el proyecto. Las tablas se crean solas en la primera petición.
+2. **Variables de entorno** (Settings → Environment Variables):
+
+| Variable | Para qué |
+|---|---|
+| `APIFY_TOKEN` | Token de tu cuenta de Apify. Solo vive en el servidor. |
+| `APP_PASSWORD` | Contraseña para entrar. Obligatoria en internet. |
+| `APP_URL` | Opcional. La URL pública si usas un dominio propio; por defecto se usa la de producción de Vercel. |
 
 ## Cómo funciona
 
-1. Cada búsqueda se guarda en SQLite (`data/scraper.db`; se puede cambiar con `DB_PATH`) y entra en una cola que procesa una a la vez en segundo plano.
-2. **Paso 1, anuncios:** `apify/facebook-ads-scraper` recibe una URL de la Ads Library por país. Cada anuncio se guarda y se agrupa por página anunciante.
-3. **Paso 2, contactos:** `apify/facebook-pages-scraper` visita las páginas de esos anunciantes y extrae lo que publican en "Información".
-4. Si cierras el navegador, la búsqueda sigue. Si reinicias el servidor, retoma la ejecución de Apify donde iba. Al cancelar se detiene la ejecución en Apify y se conserva lo ya extraído.
+1. Cada búsqueda se guarda en la base (SQLite en local, Turso en Vercel) y avanza en pasos cortos que retoman donde se quedaron. Las búsquedas se procesan de una en una, por orden de llegada.
+2. **Paso 1, anuncios:** `curious_coder/facebook-ads-library-scraper` recibe una URL de la Ads Library por país, una ejecución por país, cada una con su tope exacto. Cada anuncio se guarda y se agrupa por página anunciante.
+3. **Paso 2, contactos:** `saswave/facebook-company-page-scraper` visita la página de cada anunciante nuevo y extrae lo que publica en "Información".
+4. **No hace falta tener la pestaña abierta.** En local, un temporizador revisa cada 5 segundos. En Vercel, Apify avisa a `/api/apify-webhook` cuando termina cada ejecución, y la app sigue con el paso siguiente.
+5. Al cancelar se detiene la ejecución en Apify y se conserva lo ya extraído.
 
-El token de Apify solo vive en el servidor (`.env`) y nunca llega al navegador.
+## Costos (Apify, plan Free)
 
-## Costos (Apify)
+- $0.00075 por anuncio ($0.75 por cada 1,000).
+- $0.004 por página de anunciante ($4 por cada 1,000). Una página consultada en los últimos 30 días no se vuelve a pagar: se reutilizan sus datos.
+- Mínimo 10 anuncios por país: el actor no acepta menos.
 
-- ~$0.006 por anuncio
-- ~$0.012 por página de anunciante enriquecida
+El costo que muestra cada búsqueda es el que cobra Apify, no una estimación. Apify termina de facturar una ejecución unos segundos después de que acaba, así que el costo queda como provisional hasta 1 o 2 minutos después de terminar la búsqueda.
 
-Una página enriquecida en los últimos 30 días no se vuelve a pagar: se reutilizan sus datos. El costo que muestra la app es el que Apify reporta de cada ejecución, no una estimación.
-
-Ejemplo real: "dentista" en México y Colombia, 5 anuncios por país, dio 10 anuncios, 8 anunciantes (6 con email) y costó $0.11.
+Ejemplo real: "dentista" en México y Colombia, 10 anuncios de 8 anunciantes. Con los actores oficiales de Apify costó $0.154; con los actuales cuesta unos $0.04 y trae los mismos emails, teléfonos y direcciones.
 
 ## Límites
 
 - Solo aparecen los contactos que cada página publica. Muchas marcas grandes no ponen email.
 - Máximo 2000 anuncios por país y 40 países por búsqueda.
-- La cola procesa las búsquedas de una en una para no superar la concurrencia del plan de Apify.
-- Es una app local de un solo usuario y no tiene inicio de sesión. No la expongas a internet tal cual.
+- Una sola contraseña compartida, sin cuentas de usuario.
