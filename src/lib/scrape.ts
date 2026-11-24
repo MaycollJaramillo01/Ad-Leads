@@ -11,7 +11,10 @@ export const DATES_ACTOR = 'premiumscraper~facebook-page-transparency-scraper';
 // Apify Free-plan list prices; the real cost is read back from each run.
 export const PRICE_PER_AD = 0.00075;
 export const PRICE_PER_PAGE = 0.004;
-export const PRICE_PER_DATE = 0.003;
+// $0.003 list price + residential proxy and compute, which this actor bills on top (measured Nov 2026 at 1 GB).
+export const PRICE_PER_DATE = 0.009;
+/** The dates actor defaults to 8 GB and bills compute per GB; 1 GB returns the same data (checked Nov 2026). */
+export const DATES_MEMORY_MB = 1024;
 /** The ads actor refuses runs capped ("Maximum charged results") under 10, and there is one run per country. */
 export const MIN_ADS_PER_RUN = 10;
 /** The ads actor's per-URL limit overshoots by up to this many ads. */
@@ -172,8 +175,10 @@ export function toIsoDay(v: unknown): string {
   if (typeof v === 'number' && v > 0) return new Date(v < 1e12 ? v * 1000 : v).toISOString().slice(0, 10);
   const s = str(v).trim();
   if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
-  const t = s ? Date.parse(s) : NaN;
-  return Number.isNaN(t) ? '' : new Date(t).toISOString().slice(0, 10);
+  // "January 24, 2020" parses as local midnight: read it back in local time, or east of UTC it slips a day.
+  const d = s ? new Date(s) : null;
+  if (!d || Number.isNaN(d.getTime())) return '';
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
 export const mapCreatedDate = (p: any): string =>

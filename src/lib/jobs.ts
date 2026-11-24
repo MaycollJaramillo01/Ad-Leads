@@ -9,7 +9,7 @@ import {
   searchCounts, searchesToReconcile, updateSearch, type ScrapedAd, type SearchPatch, type SearchRow,
 } from './db.ts';
 import {
-  ADS_ACTOR, DATES_ACTOR, PAGES_ACTOR, PRICE_PER_DATE, PRICE_PER_PAGE, adsActorInput, adsRunLimits, contactKeys, datesActorInput,
+  ADS_ACTOR, DATES_ACTOR, DATES_MEMORY_MB, PAGES_ACTOR, PRICE_PER_DATE, PRICE_PER_PAGE, adsActorInput, adsRunLimits, contactKeys, datesActorInput,
   datesKeys, libraryUrls, mapAd, mapContact, mapCreatedDate, normUrl, pagesActorInput, runLimits,
 } from './scrape.ts';
 
@@ -232,7 +232,10 @@ async function advance(s: SearchRow, t0: number): Promise<Step> {
         await updateSearch(s.id, {status: 'done', finished_at: now()});
         return 'again';
       }
-      const run = await startRun(DATES_ACTOR, datesActorInput(todo), webhookUrl(), runLimits(todo.length, PRICE_PER_DATE));
+      const run = await startRun(DATES_ACTOR, datesActorInput(todo), webhookUrl(), {
+        ...runLimits(todo.length, PRICE_PER_DATE),
+        memoryMbytes: DATES_MEMORY_MB,
+      });
       await updateSearch(s.id, {dates_run_id: run.id, progress: 0, progress_total: todo.length});
       return 'wait';
     }

@@ -65,7 +65,7 @@ El repositorio está conectado al proyecto de Vercel: cada push a `main` se publ
 
 - $0.00075 por anuncio ($0.75 por cada 1,000).
 - $0.004 por página de anunciante ($4 por cada 1,000). Una página consultada en los últimos 30 días no se vuelve a pagar: se reutilizan sus datos.
-- $0.003 por fecha de creación de página ($3 por cada 1,000), solo si se activa.
+- Unos $0.009 por fecha de creación de página ($9 por cada 1,000), solo si se activa: $0.003 del actor más proxy y cómputo que ese actor cobra aparte (se corre con 1 GB para que el cómputo sea mínimo).
 - Mínimo 10 anuncios por país: el actor no acepta menos.
 - El límite por país es un máximo. Si la Biblioteca de anuncios muestra menos anuncios con esos filtros, llegan menos. Su "~N resultados" es una estimación que incluye anuncios que no lista.
 

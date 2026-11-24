@@ -50,6 +50,8 @@ export interface RunLimits {
    * cap, which can stop a run with SUCCEEDED long before it reaches the requested number of ads.
    */
   maxTotalChargeUsd?: number;
+  /** Run memory in MB; omitted = the actor's default. */
+  memoryMbytes?: number;
 }
 
 /** Start an actor run. With `webhookUrl`, Apify calls it once the run ends (any outcome). */
@@ -63,6 +65,7 @@ export async function startRun(actor: string, input: unknown, webhookUrl?: strin
   }
   if (limits.maxItems) q.set('maxItems', String(Math.ceil(limits.maxItems)));
   if (limits.maxTotalChargeUsd) q.set('maxTotalChargeUsd', limits.maxTotalChargeUsd.toFixed(2));
+  if (limits.memoryMbytes) q.set('memory', String(limits.memoryMbytes));
   const qs = q.toString();
   return (await call(`/acts/${actor}/runs${qs ? `?${qs}` : ''}`, {method: 'POST', body: JSON.stringify(input)})).data;
 }
