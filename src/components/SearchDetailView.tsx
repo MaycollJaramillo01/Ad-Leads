@@ -16,7 +16,7 @@ import {ArrowLeftIcon, ArrowPathIcon, StopIcon, TrashIcon} from '@heroicons/reac
 import {AdvertiserTable} from './AdvertiserTable';
 import {SearchProgress, SearchStatusBadge} from './SearchBits';
 import {
-  ACTIVE_STATUS_LABEL, MEDIA_OPTIONS, api, countryName, duration, isRunning, num, pct, usePolling, usd, type Search,
+  ACTIVE_STATUS_LABEL, MEDIA_OPTIONS, api, countryName, duration, isRunning, languagesLabel, num, pct, usePolling, usd, type Search,
 } from './shared';
 
 function Figure({label, value, hint}: {label: string; value: string; hint?: string}) {
@@ -106,6 +106,8 @@ export function SearchDetailView({id}: {id: number}) {
 
   const running = isRunning(search);
   const isUrl = search.query.startsWith('http');
+  const requested = search.results_limit * (isUrl ? 1 : search.countries.length);
+  const isShort = !running && search.ads_notes !== '' && search.ads_count < requested;
 
   return (
     <Layout
@@ -158,9 +160,20 @@ export function SearchDetailView({id}: {id: number}) {
             {search.status === 'cancelled' && (
               <Banner status="warning" title="Búsqueda cancelada" description="Se guardó todo lo que alcanzó a extraer antes de cancelarla." />
             )}
+            {isShort && (
+              <Banner
+                status="info"
+                title={`Llegaron ${num.format(search.ads_count)} de ${num.format(requested)} anuncios pedidos`}
+                description={`El límite es un máximo, no una cantidad garantizada: la Biblioteca de anuncios solo muestra los anuncios que coinciden con los filtros, y su "~N resultados" es una estimación que incluye anuncios que no lista. Por país:\n${search.ads_notes}`}
+              />
+            )}
 
             <Grid columns={{minWidth: 160}} gap={3}>
-              <Figure label="Anuncios analizados" value={num.format(search.ads_count)} />
+              <Figure
+                label="Anuncios analizados"
+                value={num.format(search.ads_count)}
+                hint={search.raw_items > 0 ? `de ${num.format(requested)} pedidos · ${num.format(search.raw_items)} filas de Apify` : undefined}
+              />
               <Figure label="Anunciantes" value={num.format(search.advertisers_count)} />
               <Figure label="Con email" value={num.format(search.with_email)} hint={pct(search.with_email, search.advertisers_count)} />
               <Figure label="Con teléfono" value={num.format(search.with_phone)} hint={pct(search.with_phone, search.advertisers_count)} />
@@ -181,9 +194,11 @@ export function SearchDetailView({id}: {id: number}) {
               <MetadataListItem label="Países">{search.countries.map(countryName).join(', ')}</MetadataListItem>
               <MetadataListItem label="Anuncios">{ACTIVE_STATUS_LABEL[search.active_status] ?? search.active_status}</MetadataListItem>
               <MetadataListItem label="Formato">{MEDIA_OPTIONS.find(m => m.value === search.media_type)?.label ?? search.media_type}</MetadataListItem>
+              <MetadataListItem label="Idioma">{languagesLabel(search.languages ?? [])}</MetadataListItem>
               <MetadataListItem label="Publicados desde">{search.newer_than ?? 'Cualquier fecha'}</MetadataListItem>
               <MetadataListItem label="Límite">{`${num.format(search.results_limit)} por país`}</MetadataListItem>
               <MetadataListItem label="Contactos">{search.enrich ? 'Sí' : 'No'}</MetadataListItem>
+              <MetadataListItem label="Fecha de las páginas">{search.page_dates ? 'Sí' : 'No'}</MetadataListItem>
               <MetadataListItem label="Frase exacta">{search.exact ? 'Sí' : 'No'}</MetadataListItem>
               <MetadataListItem label="Iniciada">
                 <Timestamp value={search.created_at} format="date_time" color="primary" type="body" />

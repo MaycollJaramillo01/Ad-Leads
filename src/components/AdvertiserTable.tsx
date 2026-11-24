@@ -3,6 +3,7 @@ import {Avatar} from '@astryxdesign/core/Avatar';
 import {Banner} from '@astryxdesign/core/Banner';
 import {Button} from '@astryxdesign/core/Button';
 import {Card} from '@astryxdesign/core/Card';
+import {CheckboxInput} from '@astryxdesign/core/CheckboxInput';
 import {EmptyState} from '@astryxdesign/core/EmptyState';
 import {Icon} from '@astryxdesign/core/Icon';
 import {HStack, StackItem, VStack} from '@astryxdesign/core/Layout';
@@ -10,7 +11,6 @@ import {Link} from '@astryxdesign/core/Link';
 import {MultiSelector} from '@astryxdesign/core/MultiSelector';
 import {Pagination} from '@astryxdesign/core/Pagination';
 import {ProgressBar} from '@astryxdesign/core/ProgressBar';
-import {SegmentedControl, SegmentedControlItem} from '@astryxdesign/core/SegmentedControl';
 import {Selector} from '@astryxdesign/core/Selector';
 import {Table, pixel, proportional, useTableSelection, useTableSortable} from '@astryxdesign/core/Table';
 import type {TableColumn, TableSortState} from '@astryxdesign/core/Table';
@@ -20,15 +20,20 @@ import {Timestamp} from '@astryxdesign/core/Timestamp';
 import {ArrowDownTrayIcon, MagnifyingGlassIcon, UsersIcon} from '@heroicons/react/24/outline';
 
 import {AdvertiserDrawer, LEAD_BADGE} from './AdvertiserDrawer';
-import {COUNTRY_OPTIONS, LEAD_STATUS_OPTIONS, api, num, shortUrl, type Advertiser, type LeadStatus, type Search} from './shared';
+import {
+  COUNTRY_OPTIONS, CREATED_OPTIONS, LEAD_STATUS_OPTIONS, api, contactFromChecks, num, shortUrl, type Advertiser, type LeadStatus, type Search,
+} from './shared';
 
-type Contact = 'all' | 'email' | 'phone' | 'any' | 'none';
+// 'any' and 'none' only arrive from links saved before the checkboxes; they still filter.
+type Contact = 'all' | 'email' | 'phone' | 'both' | 'any' | 'none';
 
 interface Filters {
   q: string;
   status: string;
   countries: string[];
   contact: Contact;
+  /** Page created in the last N days; '' = any date. */
+  created: string;
   search: string;
   sort: string;
   dir: 'asc' | 'desc';
@@ -36,7 +41,9 @@ interface Filters {
   pageSize: number;
 }
 
-const DEFAULT_FILTERS: Filters = {q: '', status: '', countries: [], contact: 'all', search: '', sort: 'ads', dir: 'desc', page: 1, pageSize: 50};
+const DEFAULT_FILTERS: Filters = {
+  q: '', status: '', countries: [], contact: 'all', created: '', search: '', sort: 'ads', dir: 'desc', page: 1, pageSize: 50,
+};
 
 function readUrl(): Filters {
   const p = new URLSearchParams(location.search);
@@ -45,6 +52,7 @@ function readUrl(): Filters {
     status: p.get('status') ?? '',
     countries: (p.get('countries') ?? '').split(',').filter(Boolean),
     contact: (p.get('contact') as Contact) || 'all',
+    created: p.get('created') ?? '',
     search: p.get('search') ?? '',
     sort: p.get('sort') ?? DEFAULT_FILTERS.sort,
     dir: p.get('dir') === 'asc' ? 'asc' : 'desc',
@@ -60,6 +68,7 @@ function toQuery(f: Filters, extra: Record<string, string> = {}): string {
   if (f.status) p.set('status', f.status);
   if (f.countries.length) p.set('countries', f.countries.join(','));
   if (f.contact !== 'all') p.set('contact', f.contact);
+  if (f.created) p.set('created', f.created);
   if (f.search) p.set('search', f.search);
   if (f.sort !== DEFAULT_FILTERS.sort) p.set('sort', f.sort);
   if (f.dir !== DEFAULT_FILTERS.dir) p.set('dir', f.dir);
@@ -69,17 +78,26 @@ function toQuery(f: Filters, extra: Record<string, string> = {}): string {
   return p.toString();
 }
 
-const SORT_KEY: Record<string, string> = {name: 'name', status: 'status', email: 'email', phone: 'phone', address: 'address', ads_total: 'ads', last_seen: 'last_seen'};
+const SORT_KEY: Record<string, string> = {
+  name: 'name', status: 'status', email: 'email', phone: 'phone', address: 'address', ads_total: 'ads', last_seen: 'last_seen',
+  page_created: 'page_created',
+};
 
 export function AdvertiserTable({
   searchId,
+  createdDays,
   searches,
   exportName,
   refreshKey = 0,
   isLive,
+  defaultSort,
 }: {
   /** Fixed scope (search detail page). */
   searchId?: number;
+  /** Fixed scope: only pages created in the last N days ("Páginas nuevas"). */
+  createdDays?: number;
+  /** Starting sort when the URL has none, e.g. newest pages first. */
+  defaultSort?: {sort: string; dir: 'asc' | 'desc'};
   /** When given, shows a "found in search" filter. */
   searches?: Search[];
   exportName: string;
@@ -87,7 +105,11 @@ export function AdvertiserTable({
   /** Rows are still arriving: show a hint instead of an empty state. */
   isLive?: boolean;
 }) {
-  const [f, setF] = useState<Filters>(() => ({...DEFAULT_FILTERS, ...readUrl()}));
+  const [f, setF] = useState<Filters>(() => {
+    const fromUrl = readUrl();
+    const hasSort = new URLSearchParams(location.search).has('sort');
+    return {...DEFAULT_FILTERS, ...fromUrl, ...(defaultSort && !hasSort ? defaultSort : {})};
+  });
   const [debouncedQ, setDebouncedQ] = useState(f.q);
   const [data, setData] = useState<{items: Advertiser[]; total: number} | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -103,14 +125,23 @@ export function AdvertiserTable({
     return () => clearTimeout(t);
   }, [f.q]);
 
-  const scoped = {...f, q: debouncedQ, search: searchId ? String(searchId) : f.search};
+  const scoped = {
+    ...f,
+    q: debouncedQ,
+    search: searchId ? String(searchId) : f.search,
+    created: createdDays ? String(createdDays) : f.created,
+  };
   const query = toQuery(scoped);
 
   // URL mirrors the filters (and the open record) so a view can be bookmarked or shared.
   useEffect(() => {
-    const own = toQuery({...f, search: searchId ? '' : f.search}, openId ? {anunciante: openId} : {});
+    const own = toQuery({...f, search: searchId ? '' : f.search, created: createdDays ? '' : f.created}, openId ? {anunciante: openId} : {});
     history.replaceState(null, '', own ? `?${own}` : location.pathname);
-  }, [f, openId, searchId]);
+  }, [f, openId, searchId, createdDays]);
+
+  const wantsEmail = f.contact === 'email' || f.contact === 'both';
+  const wantsPhone = f.contact === 'phone' || f.contact === 'both';
+  const setContact = (email: boolean, phone: boolean) => set({contact: contactFromChecks(email, phone) || 'all'});
 
   useEffect(() => {
     let cancelled = false;
@@ -267,14 +298,23 @@ export function AdvertiserTable({
           </VStack>
         ),
       },
+      {
+        key: 'page_created',
+        header: 'Página creada',
+        width: pixel(130),
+        sortable: true,
+        renderCell: a =>
+          a.page_created ? <Timestamp value={`${a.page_created}T12:00:00Z`} format="date" /> : <Text color="disabled">—</Text>,
+      },
       {key: 'last_seen', header: 'Visto', width: pixel(110), sortable: true, renderCell: a => <Timestamp value={a.last_seen} format="relative" />},
     ],
     [],
   );
 
-  const activeFilters = (f.q ? 1 : 0) + (f.status ? 1 : 0) + (f.countries.length ? 1 : 0) + (f.contact !== 'all' ? 1 : 0) + (!searchId && f.search ? 1 : 0);
-  const clear = () => setF(prev => ({...DEFAULT_FILTERS, sort: prev.sort, dir: prev.dir, pageSize: prev.pageSize}));
-  const exportHref = `/api/export?${toQuery(scoped, {filename: exportName})}`;
+  const activeFilters =
+    (f.q ? 1 : 0) + (f.status ? 1 : 0) + (f.countries.length ? 1 : 0) + (f.contact !== 'all' ? 1 : 0) + (!createdDays && f.created ? 1 : 0) +
+    (!searchId && f.search ? 1 : 0);
+  const clear = () => setF(prev => ({...DEFAULT_FILTERS, sort: prev.sort, dir: prev.dir, pageSize: prev.pageSize}));  const exportHref = `/api/export?${toQuery(scoped, {filename: exportName})}`;
   const exportSelectedHref = `/api/export?${new URLSearchParams({ids: [...selected].join(','), filename: `${exportName}-seleccion`})}`;
 
   return (
@@ -291,12 +331,24 @@ export function AdvertiserTable({
             hasClear
           />
         </VStack>
-        <SegmentedControl label="Contacto" value={f.contact} onChange={v => set({contact: v as Contact})}>
-          <SegmentedControlItem value="all" label="Todos" />
-          <SegmentedControlItem value="email" label="Con email" />
-          <SegmentedControlItem value="phone" label="Con teléfono" />
-          <SegmentedControlItem value="none" label="Sin contacto" />
-        </SegmentedControl>
+        <VStack gap={1}>
+          <Text type="supporting" weight="medium">
+            Con contacto
+          </Text>
+          <HStack gap={4} vAlign="center">
+            <CheckboxInput label="Correo" value={wantsEmail} onChange={v => setContact(v, wantsPhone)} />
+            <CheckboxInput label="Teléfono" value={wantsPhone} onChange={v => setContact(wantsEmail, v)} />
+          </HStack>
+        </VStack>
+        {!createdDays && (
+          <Selector
+            label="Página creada"
+            options={CREATED_OPTIONS}
+            value={f.created}
+            onChange={v => set({created: v ?? ''})}
+            width={170}
+          />
+        )}
         <Selector
           label="Estado"
           options={[{value: '', label: 'Todos los estados'}, ...LEAD_STATUS_OPTIONS]}
@@ -367,8 +419,17 @@ export function AdvertiserTable({
         ) : (
           <EmptyState
             icon={<Icon icon={UsersIcon} size="lg" />}
-            title={isLive ? 'Los anunciantes aparecerán aquí en cuanto termine el paso 1' : 'No hay anunciantes todavía'}
-            description={isLive ? undefined : 'Lanza una búsqueda: cada anunciante encontrado se guarda aquí automáticamente.'}
+            title={
+              isLive ? 'Los anunciantes aparecerán aquí en cuanto termine el paso 1'
+              : createdDays ? `Ninguna página de tus anunciantes se creó en los últimos ${createdDays} días`
+              : 'No hay anunciantes todavía'
+            }
+            description={
+              isLive ? undefined
+              : createdDays
+                ? 'Solo se conocen las fechas de las búsquedas hechas con "Fecha de creación de la página" activado.'
+                : 'Lanza una búsqueda: cada anunciante encontrado se guarda aquí automáticamente.'
+            }
             actions={isLive ? undefined : <Button label="Nueva búsqueda" variant="primary" href="/" />}
           />
         )

@@ -2,7 +2,7 @@ import type {APIRoute} from 'astro';
 import {createSearch, listSearches} from '../../../lib/db';
 import {fail, json} from '../../../lib/http';
 import {kick} from '../../../lib/jobs';
-import {MIN_ADS_PER_RUN, isFacebookUrl} from '../../../lib/scrape';
+import {LANGUAGE_CODES, MIN_ADS_PER_RUN, isFacebookUrl} from '../../../lib/scrape';
 
 export const GET: APIRoute = async ({url}) => {
   kick();
@@ -35,6 +35,11 @@ export const POST: APIRoute = async ({request}) => {
     results_limit: Math.min(Math.max(Math.round(Number(b.limit)) || 50, MIN_ADS_PER_RUN), 2000),
     enrich: b.enrich !== false,
     exact: b.exact === true,
+    // A pasted URL keeps its own filters, language included.
+    languages: isUrl
+      ? []
+      : [...new Set<string>((Array.isArray(b.languages) ? b.languages : []).filter((l: unknown) => typeof l === 'string' && LANGUAGE_CODES.includes(l)))],
+    page_dates: b.pageDates === true,
   });
   kick();
   return json({search}, 201);

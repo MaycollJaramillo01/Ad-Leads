@@ -13,6 +13,7 @@ const COLUMNS: [string, string][] = [
   ['status', 'Estado'],
   ['notes', 'Notas'],
   ['page_url', 'Página de Facebook'],
+  ['page_created', 'Página creada'],
   ['ad_library', 'Ads Library'],
   ['first_seen', 'Visto por primera vez'],
   ['last_seen', 'Visto por última vez'],

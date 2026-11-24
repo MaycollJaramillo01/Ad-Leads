@@ -1,0 +1,8 @@
+---
+import Page from '../layouts/Page.astro';
+import App from '../components/App';
+---
+
+<Page title="Páginas nuevas">
+	<App client:only="react" view="newpages" />
+</Page>

@@ -13,7 +13,10 @@ import {Heading, Text} from '@astryxdesign/core/Text';
 import {TextInput} from '@astryxdesign/core/TextInput';
 import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 
-import {COUNTRY_OPTIONS, MEDIA_OPTIONS, MIN_ADS_PER_RUN, PRICE_PER_AD, PRICE_PER_PAGE, REGIONS, api, num, usd, type Search} from './shared';
+import {
+  COUNTRY_OPTIONS, LANGUAGE_OPTIONS, MEDIA_OPTIONS, MIN_ADS_PER_RUN, PRICE_PER_AD, PRICE_PER_DATE, PRICE_PER_PAGE, REGIONS, api, num, usd,
+  type Search,
+} from './shared';
 
 const ALL_OPTION = {value: 'ALL', label: 'Todos los países'};
 const OPTIONS = [ALL_OPTION, {type: 'divider' as const}, ...COUNTRY_OPTIONS];
@@ -28,6 +31,8 @@ interface FormState {
   limit: number;
   enrich: boolean;
   exact: boolean;
+  languages: string[];
+  pageDates: boolean;
 }
 
 const DEFAULTS: FormState = {
@@ -39,6 +44,8 @@ const DEFAULTS: FormState = {
   limit: 50,
   enrich: true,
   exact: false,
+  languages: [],
+  pageDates: false,
 };
 
 /** "Todos los países" is exclusive: picking it clears the rest, picking a country clears it. */
@@ -71,6 +78,8 @@ export function NewSearchForm() {
           limit: Math.max(s.results_limit, MIN_ADS_PER_RUN),
           enrich: s.enrich,
           exact: s.exact,
+          languages: s.languages ?? [],
+          pageDates: s.page_dates ?? false,
         });
       })
       .catch(() => {});
@@ -79,7 +88,8 @@ export function NewSearchForm() {
   const isUrl = isFacebookUrl(f.query);
   const urlCount = isUrl ? 1 : f.countries.length;
   const maxAds = urlCount * f.limit;
-  const estimate = maxAds * PRICE_PER_AD + (f.enrich ? maxAds * PRICE_PER_PAGE : 0);
+  const estimate = maxAds * PRICE_PER_AD + (f.enrich ? maxAds * PRICE_PER_PAGE : 0) + (f.pageDates ? maxAds * PRICE_PER_DATE : 0);
+  const pageSteps = [f.enrich && 'páginas', f.pageDates && 'fechas de creación'].filter(Boolean).join(' y ');
 
   const queryError = touched && !f.query.trim() ? 'Escribe una palabra clave o pega una URL de Facebook.' : undefined;
   const countryError = touched && !isUrl && f.countries.length === 0 ? 'Elige al menos un país.' : undefined;
@@ -171,6 +181,21 @@ export function NewSearchForm() {
             <SegmentedControlItem value="all" label="Todos" />
           </SegmentedControl>
           <Selector label="Formato" options={MEDIA_OPTIONS} value={f.mediaType} onChange={v => v && set('mediaType', v)} width={200} />
+          <MultiSelector
+            label="Idioma del anuncio"
+            options={LANGUAGE_OPTIONS}
+            value={f.languages}
+            onChange={v => set('languages', v)}
+            hasSearch
+            searchPlaceholder="Buscar idioma…"
+            placeholder="Cualquier idioma"
+            formatValue={sel => (sel.length <= 2 ? sel.map(s => s.label).join(', ') : `${sel.length} idiomas`)}
+            isOptional
+            isDisabled={isUrl}
+            disabledMessage="La URL ya define sus filtros"
+            labelTooltip="El filtro de idioma de la Biblioteca de anuncios de Meta: solo anuncios escritos en esos idiomas."
+            width={220}
+          />
           <DateInput
             label="Publicados desde"
             value={f.newerThan as any}
@@ -200,6 +225,12 @@ export function NewSearchForm() {
             onChange={v => set('enrich', v)}
           />
           <Switch
+            label="Fecha de creación de la página"
+            description={`Consulta la sección "Transparencia de la página" de cada anunciante para saber cuándo se creó. Así aparecen en "Páginas nuevas" las creadas en el último mes. Unos ${usd(PRICE_PER_DATE * 1000)} por cada 1,000 páginas, y una página con fecha no se vuelve a cobrar.`}
+            value={f.pageDates}
+            onChange={v => set('pageDates', v)}
+          />
+          <Switch
             label="Frase exacta"
             description="Solo anuncios que contengan la frase tal cual, en ese orden."
             value={f.exact}
@@ -215,7 +246,7 @@ export function NewSearchForm() {
             <VStack gap={0.5}>
               <Text weight="medium">{`Costo máximo estimado: ${usd(estimate)}`}</Text>
               <Text type="supporting">
-                {`Hasta ${num.format(maxAds)} anuncios${f.enrich ? ` y ${num.format(maxAds)} páginas` : ''} · precios del plan Free de Apify. Normalmente cuesta bastante menos: muchos anuncios son del mismo anunciante.`}
+                {`Hasta ${num.format(maxAds)} anuncios${pageSteps ? ` y ${num.format(maxAds)} ${pageSteps}` : ''} · precios del plan Free de Apify. Normalmente cuesta bastante menos: muchos anuncios son del mismo anunciante.`}
               </Text>
             </VStack>
           </StackItem>

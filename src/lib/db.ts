@@ -31,7 +31,12 @@ CREATE TABLE IF NOT EXISTS searches (
   cancel_requested INTEGER NOT NULL DEFAULT 0,
   lease_until TEXT,                     -- who may advance it right now (see lease())
   ingest_offset INTEGER NOT NULL DEFAULT 0,  -- dataset items already saved
-  cost_final INTEGER NOT NULL DEFAULT 0      -- cost re-read after Apify closed the bill
+  cost_final INTEGER NOT NULL DEFAULT 0,     -- cost re-read after Apify closed the bill
+  languages TEXT NOT NULL DEFAULT '[]',      -- JSON array of ISO 639-1 codes; [] = any language
+  page_dates INTEGER NOT NULL DEFAULT 0,     -- step 3: fetch each page's creation date
+  dates_run_id TEXT,
+  raw_items INTEGER NOT NULL DEFAULT 0,      -- items Apify returned in step 1, valid or not
+  ads_notes TEXT NOT NULL DEFAULT ''         -- one line per country: what came back and why it stopped
 );
 
 CREATE TABLE IF NOT EXISTS advertisers (
@@ -48,7 +53,8 @@ CREATE TABLE IF NOT EXISTS advertisers (
   instagram TEXT NOT NULL DEFAULT '',
   followers INTEGER,
   rating INTEGER,
-  page_created TEXT NOT NULL DEFAULT '',
+  page_created TEXT NOT NULL DEFAULT '',  -- YYYY-MM-DD, from the page's transparency section
+  created_checked_at TEXT,                -- when step 3 last looked for page_created
   enriched_at TEXT,
   status TEXT NOT NULL DEFAULT 'nuevo',  -- nuevo | contactado | interesado | cliente | descartado
   notes TEXT NOT NULL DEFAULT '',
@@ -93,7 +99,13 @@ const LATER_COLUMNS: [string, string][] = [
   ['ingest_offset', 'INTEGER NOT NULL DEFAULT 0'],
   ['cost_final', 'INTEGER NOT NULL DEFAULT 0'],
   ['ads_runs', "TEXT NOT NULL DEFAULT ''"],
+  ['languages', "TEXT NOT NULL DEFAULT '[]'"],
+  ['page_dates', 'INTEGER NOT NULL DEFAULT 0'],
+  ['dates_run_id', 'TEXT'],
+  ['raw_items', 'INTEGER NOT NULL DEFAULT 0'],
+  ['ads_notes', "TEXT NOT NULL DEFAULT ''"],
 ];
+const LATER_ADVERTISER_COLUMNS: [string, string][] = [['created_checked_at', 'TEXT']];
 
 async function open(): Promise<Client> {
   const url = process.env.TURSO_DATABASE_URL;
@@ -111,6 +123,8 @@ async function open(): Promise<Client> {
   await c.executeMultiple(SCHEMA);
   const have = new Set((await c.execute('PRAGMA table_info(searches)')).rows.map(r => String(r.name)));
   for (const [name, def] of LATER_COLUMNS) if (!have.has(name)) await c.execute(`ALTER TABLE searches ADD COLUMN ${name} ${def}`);
+  const haveAdv = new Set((await c.execute('PRAGMA table_info(advertisers)')).rows.map(r => String(r.name)));
+  for (const [name, def] of LATER_ADVERTISER_COLUMNS) if (!haveAdv.has(name)) await c.execute(`ALTER TABLE advertisers ADD COLUMN ${name} ${def}`);
   return c;
 }
 
@@ -134,8 +148,8 @@ async function batch(stmts: InStatement[]) {
 
 // ============= TYPES =============
 
-export type SearchStatus = 'queued' | 'ads' | 'pages' | 'done' | 'error' | 'cancelled';
-export const RUNNING: SearchStatus[] = ['queued', 'ads', 'pages'];
+export type SearchStatus = 'queued' | 'ads' | 'pages' | 'dates' | 'done' | 'error' | 'cancelled';
+export const RUNNING: SearchStatus[] = ['queued', 'ads', 'pages', 'dates'];
 export const LEAD_STATUSES = ['nuevo', 'contactado', 'interesado', 'cliente', 'descartado'] as const;
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
 
@@ -168,6 +182,11 @@ export interface SearchRow {
   lease_until: string | null;
   ingest_offset: number;
   cost_final: boolean;
+  languages: string[];
+  page_dates: boolean;
+  dates_run_id: string | null;
+  raw_items: number;
+  ads_notes: string;
 }
 
 export interface NewSearch {
@@ -179,6 +198,8 @@ export interface NewSearch {
   results_limit: number;
   enrich: boolean;
   exact: boolean;
+  languages: string[];
+  page_dates: boolean;
 }
 
 export interface ScrapedAd {
@@ -230,8 +251,10 @@ function toSearch(r: any): SearchRow {
   return {
     ...r,
     countries: JSON.parse(r.countries),
+    languages: JSON.parse(r.languages || '[]'),
     enrich: Boolean(r.enrich),
     exact: Boolean(r.exact),
+    page_dates: Boolean(r.page_dates),
     cancel_requested: Boolean(r.cancel_requested),
     cost_final: Boolean(r.cost_final),
   };
@@ -239,9 +262,12 @@ function toSearch(r: any): SearchRow {
 
 export async function createSearch(s: NewSearch): Promise<SearchRow> {
   const row = await one<{id: number}>(
-    `INSERT INTO searches (query, countries, active_status, media_type, newer_than, results_limit, enrich, exact, progress_total)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
-    [s.query, JSON.stringify(s.countries), s.active_status, s.media_type, s.newer_than, s.results_limit, s.enrich ? 1 : 0, s.exact ? 1 : 0, s.results_limit * s.countries.length],
+    `INSERT INTO searches (query, countries, active_status, media_type, newer_than, results_limit, enrich, exact, languages, page_dates, progress_total)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
+    [
+      s.query, JSON.stringify(s.countries), s.active_status, s.media_type, s.newer_than, s.results_limit, s.enrich ? 1 : 0, s.exact ? 1 : 0,
+      JSON.stringify(s.languages), s.page_dates ? 1 : 0, s.results_limit * s.countries.length,
+    ],
   );
   return (await getSearch(Number(row!.id)))!;
 }
@@ -260,7 +286,9 @@ export async function listRunningSearches(): Promise<SearchRow[]> {
   return (await all(`${SEARCH_SELECT} WHERE s.status IN (${RUNNING.map(() => '?').join(',')}) ORDER BY s.id`, RUNNING)).map(toSearch);
 }
 
-export type SearchPatch = Partial<Omit<SearchRow, 'id' | 'countries' | 'enrich' | 'exact' | 'with_email' | 'with_phone'>>;
+export type SearchPatch = Partial<
+  Omit<SearchRow, 'id' | 'countries' | 'languages' | 'enrich' | 'exact' | 'page_dates' | 'with_email' | 'with_phone'>
+>;
 function searchUpdate(id: number, patch: SearchPatch): InStatement {
   const keys = Object.keys(patch);
   const value = (v: unknown) => (v === true ? 1 : v === false ? 0 : ((v ?? null) as InValue));
@@ -295,9 +323,9 @@ export async function lease(id: number, seconds: number): Promise<boolean> {
 export const release = (id: number) => run('UPDATE searches SET lease_until = NULL WHERE id = ?', [id]);
 
 /** Finished searches whose cost was read before Apify finished billing (it lags ~30 s). */
-export async function searchesToReconcile(): Promise<Pick<SearchRow, 'id' | 'ads_runs' | 'pages_run_id'>[]> {
+export async function searchesToReconcile(): Promise<Pick<SearchRow, 'id' | 'ads_runs' | 'pages_run_id' | 'dates_run_id'>[]> {
   return all(
-    `SELECT id, ads_runs, pages_run_id FROM searches
+    `SELECT id, ads_runs, pages_run_id, dates_run_id FROM searches
      WHERE cost_final = 0 AND status IN ('done', 'error', 'cancelled') AND finished_at < ? ORDER BY id LIMIT 5`,
     [new Date(Date.now() - 90_000).toISOString()],
   );
@@ -394,13 +422,41 @@ export async function saveContacts(searchId: number, found: {pageId: string; con
   ]);
 }
 
+/**
+ * Advertisers of a search with no creation date yet. A creation date never changes, so a page
+ * that has one is never looked up again; one that came back empty is retried after 30 days.
+ */
+export async function pagesToDate(searchId: number): Promise<{page_id: string; page_url: string}[]> {
+  return all(
+    `SELECT a.page_id, a.page_url FROM search_results r JOIN advertisers a USING(page_id)
+     WHERE r.search_id = ? AND a.page_url <> '' AND a.page_created = ''
+       AND (a.created_checked_at IS NULL OR a.created_checked_at < ?)`,
+    [searchId, new Date(Date.now() - ENRICH_TTL_DAYS * 864e5).toISOString()],
+  );
+}
+
+/** Store the creation dates found, mark every page tried, and close the step — atomically. */
+export async function saveCreatedDates(searchId: number, found: {pageId: string; created: string}[], tried: string[], patch: SearchPatch) {
+  const ts = now();
+  await batch([
+    ...found.map(f => ({sql: 'UPDATE advertisers SET page_created = ?, created_checked_at = ? WHERE page_id = ?', args: [f.created, ts, f.pageId]})),
+    ...tried.map(id => ({sql: 'UPDATE advertisers SET created_checked_at = ? WHERE page_id = ? AND created_checked_at IS NULL', args: [ts, id]})),
+    searchUpdate(searchId, patch),
+  ]);
+}
+
 // ============= ADVERTISERS =============
+
+export type ContactFilter = 'email' | 'phone' | 'both' | 'any' | 'none';
 
 export interface AdvertiserFilter {
   q?: string;
   status?: string;
   countries?: string[];
-  contact?: 'email' | 'phone' | 'any' | 'none';
+  /** email / phone: has that one; both: has email and phone; any: has either; none: has neither. */
+  contact?: ContactFilter;
+  /** Only pages created in the last N days (needs the creation date, step 3). */
+  createdDays?: number;
   searchId?: number;
   ids?: string[];
   sort?: string;
@@ -418,6 +474,7 @@ const SORTS: Record<string, string> = {
   ads: 'ads_total',
   followers: 'a.followers',
   last_seen: 'a.last_seen',
+  page_created: "a.page_created = '', a.page_created",
 };
 
 function where(f: AdvertiserFilter): {sql: string; args: InValue[]} {
@@ -438,7 +495,12 @@ function where(f: AdvertiserFilter): {sql: string; args: InValue[]} {
   }
   if (f.contact === 'email') parts.push("a.email <> ''");
   if (f.contact === 'phone') parts.push("a.phone <> ''");
+  if (f.contact === 'both') parts.push("a.email <> '' AND a.phone <> ''");
   if (f.contact === 'any') parts.push("(a.email <> '' OR a.phone <> '')");
+  if (f.createdDays) {
+    parts.push("a.page_created <> '' AND a.page_created >= ?");
+    args.push(new Date(Date.now() - f.createdDays * 864e5).toISOString().slice(0, 10));
+  }
   if (f.contact === 'none') parts.push("a.email = '' AND a.phone = ''");
   if (f.searchId) {
     parts.push('EXISTS (SELECT 1 FROM search_results r WHERE r.page_id = a.page_id AND r.search_id = ?)');
@@ -526,8 +588,10 @@ export async function stats() {
     (SELECT COUNT(*) FROM advertisers WHERE address <> '') withAddress,
     (SELECT COUNT(*) FROM ads) ads,
     (SELECT COUNT(*) FROM searches) searches,
-    (SELECT COUNT(*) FROM searches WHERE status IN ('queued','ads','pages')) running,
-    (SELECT COALESCE(SUM(cost_usd), 0) FROM searches) costUsd`);
+    (SELECT COUNT(*) FROM searches WHERE status IN ('queued','ads','pages','dates')) running,
+    (SELECT COUNT(*) FROM advertisers WHERE page_created <> '' AND page_created >= ?) newPages,
+    (SELECT COUNT(*) FROM advertisers WHERE page_created <> '') withCreated,
+    (SELECT COALESCE(SUM(cost_usd), 0) FROM searches) costUsd`, [new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10)]);
   return {
     ...r,
     byStatus: await all<{status: string; n: number}>('SELECT status, COUNT(*) n FROM advertisers GROUP BY status'),

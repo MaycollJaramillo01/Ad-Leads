@@ -2,6 +2,7 @@ import {useEffect, useMemo, useState} from 'react';
 import {AlertDialog} from '@astryxdesign/core/AlertDialog';
 import {Banner} from '@astryxdesign/core/Banner';
 import {Button} from '@astryxdesign/core/Button';
+import {CheckboxInput} from '@astryxdesign/core/CheckboxInput';
 import {EmptyState} from '@astryxdesign/core/EmptyState';
 import {Icon} from '@astryxdesign/core/Icon';
 import {HStack, Layout, LayoutContent, StackItem, VStack} from '@astryxdesign/core/Layout';
@@ -12,12 +13,21 @@ import type {TableColumn, TableSortComparator} from '@astryxdesign/core/Table';
 import {Heading, Text} from '@astryxdesign/core/Text';
 import {TextInput} from '@astryxdesign/core/TextInput';
 import {Timestamp} from '@astryxdesign/core/Timestamp';
-import {ArrowPathIcon, ClockIcon, MagnifyingGlassIcon, PlusIcon, TrashIcon} from '@heroicons/react/24/outline';
+import {ArrowDownTrayIcon, ArrowPathIcon, ClockIcon, MagnifyingGlassIcon, PlusIcon, TrashIcon} from '@heroicons/react/24/outline';
 
 import {SearchProgress, SearchStatusBadge} from './SearchBits';
-import {api, countriesLabel, isRunning, num, pct, usePolling, usd, type Search} from './shared';
+import {api, contactFromChecks, countriesLabel, isRunning, num, pct, usePolling, usd, type Search} from './shared';
 
 type Scope = 'all' | 'running' | 'done' | 'failed';
+
+/** CSV of one past search's advertisers, optionally only those with email and/or phone. */
+const CONTACT_SUFFIX: Record<string, string> = {email: '-con-correo', phone: '-con-telefono', both: '-con-correo-y-telefono'};
+
+function exportHref(s: Search, contact: string) {
+  const p = new URLSearchParams({search: String(s.id), filename: `busqueda-${s.id}-${s.query.slice(0, 30)}${CONTACT_SUFFIX[contact] ?? ''}`});
+  if (contact) p.set('contact', contact);
+  return `/api/export?${p}`;
+}
 
 export function SearchesView() {
   const [searches, setSearches] = useState<Search[] | null>(null);
@@ -26,6 +36,10 @@ export function SearchesView() {
   const [q, setQ] = useState('');
   const [toDelete, setToDelete] = useState<Search | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [withEmail, setWithEmail] = useState(false);
+  const [withPhone, setWithPhone] = useState(false);
+  const contact = contactFromChecks(withEmail, withPhone);
+  const contactLabel = contact === 'both' ? ' con correo y teléfono' : contact === 'email' ? ' con correo' : contact === 'phone' ? ' con teléfono' : '';
 
   const load = () =>
     api<{searches: Search[]}>('/api/searches?limit=500')
@@ -119,10 +133,20 @@ export function SearchesView() {
     {
       key: 'actions',
       header: 'Acciones',
-      width: pixel(96),
+      width: pixel(132),
       align: 'end',
       renderCell: s => (
         <HStack gap={1} hAlign="end">
+          <Button
+            label={`Descargar CSV${contactLabel}`}
+            isIconOnly
+            variant="ghost"
+            size="sm"
+            icon={<Icon icon={ArrowDownTrayIcon} />}
+            href={exportHref(s, contact)}
+            isDisabled={s.advertisers_count === 0}
+            tooltip={s.advertisers_count === 0 ? 'Sin anunciantes' : `Descargar CSV${contactLabel}`}
+          />
           <Button label="Repetir búsqueda" isIconOnly variant="ghost" size="sm" icon={<Icon icon={ArrowPathIcon} />} href={`/?repetir=${s.id}`} tooltip="Repetir" />
           <Button
             label="Borrar búsqueda"
@@ -186,6 +210,15 @@ export function SearchesView() {
               <VStack width={280}>
                 <TextInput label="Buscar en el historial" isLabelHidden value={q} onChange={setQ} placeholder="Buscar palabra clave…" startIcon={MagnifyingGlassIcon} hasClear />
               </VStack>
+            </HStack>
+
+            <HStack gap={4} vAlign="center" wrap="wrap">
+              <Text type="supporting" weight="medium">
+                Al descargar, incluir solo anunciantes con:
+              </Text>
+              <CheckboxInput label="Correo" value={withEmail} onChange={setWithEmail} size="sm" />
+              <CheckboxInput label="Teléfono" value={withPhone} onChange={setWithPhone} size="sm" />
+              <Text type="supporting">{contact ? 'Si marcas los dos, se exigen ambos.' : 'Sin marcar: todos los anunciantes de la búsqueda.'}</Text>
             </HStack>
 
             {searches && searches.length === 0 ? (

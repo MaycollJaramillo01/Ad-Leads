@@ -19,9 +19,10 @@ import {
   ClockIcon as ClockOutline,
   MagnifyingGlassIcon as SearchOutline,
   UsersIcon as UsersOutline,
+  SparklesIcon as SparklesOutline,
   MegaphoneIcon,
 } from '@heroicons/react/24/outline';
-import {ClockIcon, MagnifyingGlassIcon, UsersIcon} from '@heroicons/react/24/solid';
+import {ClockIcon, MagnifyingGlassIcon, SparklesIcon, UsersIcon} from '@heroicons/react/24/solid';
 
 import {themes, defaultThemeSlug} from '../astryx-themes';
 import {api, num, usePolling, type Stats} from './shared';
@@ -30,8 +31,9 @@ import {SearchesView} from './SearchesView';
 import {SearchDetailView} from './SearchDetailView';
 import {AdvertisersView} from './AdvertisersView';
 import {LoginView} from './LoginView';
+import {NewPagesView} from './NewPagesView';
 
-export type View = 'home' | 'searches' | 'search' | 'advertisers' | 'login';
+export type View = 'home' | 'searches' | 'search' | 'advertisers' | 'newpages' | 'login';
 
 const logout = () => fetch('/api/login', {method: 'DELETE'}).finally(() => (location.href = '/login'));
 
@@ -85,6 +87,14 @@ function Shell({view, id}: {view: View; id?: number}) {
               isSelected={view === 'advertisers'}
               endContent={stats ? <Badge label={num.format(stats.advertisers)} /> : undefined}
             />
+            <SideNavItem
+              label="Páginas nuevas"
+              icon={SparklesOutline}
+              selectedIcon={SparklesIcon}
+              href="/paginas-nuevas"
+              isSelected={view === 'newpages'}
+              endContent={stats && stats.newPages > 0 ? <Badge label={num.format(stats.newPages)} /> : undefined}
+            />
           </SideNavSection>
         </SideNav>
       }>
@@ -92,6 +102,7 @@ function Shell({view, id}: {view: View; id?: number}) {
       {view === 'searches' && <SearchesView />}
       {view === 'search' && id != null && <SearchDetailView id={id} />}
       {view === 'advertisers' && <AdvertisersView />}
+      {view === 'newpages' && <NewPagesView stats={stats} />}
     </AppShell>
   );
 }

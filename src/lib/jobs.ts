@@ -5,11 +5,12 @@
 import {waitUntil} from '@vercel/functions';
 import {TERMINAL, TransientError, abortRun, datasetCount, datasetItems, getRun, startRun, webhookKey} from './apify.ts';
 import {
-  RUNNING, getSearch, ingestAds, lease, listRunningSearches, pagesToEnrich, release, saveContacts, searchCounts,
-  searchesToReconcile, updateSearch, type ScrapedAd, type SearchPatch, type SearchRow,
+  RUNNING, getSearch, ingestAds, lease, listRunningSearches, pagesToDate, pagesToEnrich, release, saveContacts, saveCreatedDates,
+  searchCounts, searchesToReconcile, updateSearch, type ScrapedAd, type SearchPatch, type SearchRow,
 } from './db.ts';
 import {
-  ADS_ACTOR, PAGES_ACTOR, adsActorInput, contactKeys, libraryUrls, mapAd, mapContact, normUrl, pagesActorInput,
+  ADS_ACTOR, DATES_ACTOR, PAGES_ACTOR, PRICE_PER_DATE, PRICE_PER_PAGE, adsActorInput, adsRunLimits, contactKeys, datesActorInput,
+  datesKeys, libraryUrls, mapAd, mapContact, mapCreatedDate, normUrl, pagesActorInput, runLimits,
 } from './scrape.ts';
 
 const BUDGET_MS = 20_000; // per tick: Apify waits ~30 s for a webhook reply
@@ -66,12 +67,24 @@ export async function cancel(id: number) {
   kick();
 }
 
+/** Country code of an Ads Library URL, for the per-country notes. */
+const urlCountry = (url: string | undefined) => {
+  try {
+    return new URL(url ?? '').searchParams.get('country') || 'URL';
+  } catch {
+    return 'URL';
+  }
+};
+
+/** Status after contacts: the creation-date step if asked for, otherwise finished. */
+const afterContacts = (s: SearchRow): SearchPatch => (s.page_dates ? {status: 'dates', progress: 0} : {status: 'done', finished_at: now()});
+
 async function advance(s: SearchRow, t0: number): Promise<Step> {
   // ---- Step 1: ads, one Apify run per country (see adsActorInput), one after another ----
   const urls = libraryUrls(s);
   const adsRuns = s.ads_runs.split(' ').filter(Boolean);
   const startNextAdsRun = async (patch: SearchPatch) => {
-    const run = await startRun(ADS_ACTOR, adsActorInput(s, urls[adsRuns.length]), webhookUrl());
+    const run = await startRun(ADS_ACTOR, adsActorInput(s, urls[adsRuns.length]), webhookUrl(), adsRunLimits(s));
     await updateSearch(s.id, {...patch, status: 'ads', ads_runs: [...adsRuns, run.id].join(' '), ingest_offset: 0});
   };
 
@@ -103,21 +116,39 @@ async function advance(s: SearchRow, t0: number): Promise<Step> {
       if (items.length < PAGE) break;
     }
     const {ads, advertisers} = await searchCounts(s.id);
+    // What this country brought back, so a short result explains itself instead of looking like a bug:
+    // Meta may simply list fewer ads than asked for, or the run may have stopped early.
+    const validHere = ads - s.ads_count;
+    const country = urlCountry(urls[adsRuns.length - 1]);
+    const why =
+      run.status !== 'SUCCEEDED' ? `terminó con estado ${run.status}`
+      : itemError ? itemError
+      : validHere < s.results_limit ? 'la Biblioteca de anuncios no mostró más con estos filtros'
+      : '';
+    const note = `${country}: ${validHere} de ${s.results_limit} anuncios (${offset} filas de Apify)${why ? ` · ${why}` : ''}${
+      why && run.statusMessage ? ` · Apify: ${run.statusMessage}` : ''
+    }`;
     const counts = {
       ads_count: ads,
       advertisers_count: advertisers,
+      raw_items: s.raw_items + offset,
+      ads_notes: [s.ads_notes, note].filter(Boolean).join('\n'),
       cost_usd: s.cost_usd + (run.usageTotalUsd ?? 0), // provisional: reconcileCosts() re-reads it once Apify closes the bill
     };
-    if (run.status === 'SUCCEEDED' && !s.cancel_requested && adsRuns.length < urls.length) {
+    const cancelled = s.cancel_requested || run.status === 'ABORTED';
+    // A failed or timed-out country no longer ends the whole search: the others still run.
+    if (!cancelled && adsRuns.length < urls.length) {
       await startNextAdsRun({...counts, progress: ads}); // next country
       return 'wait';
     }
     // The actor reports bad input as a SUCCEEDED run whose only items are {error: "..."}.
     const actorError = ads === 0 && offset > 0 ? itemError || run.statusMessage || 'no devolvió anuncios' : null;
+    const failed = ads === 0 && (run.status !== 'SUCCEEDED' || actorError);
     const next =
-      s.cancel_requested || run.status === 'ABORTED' ? 'cancelled'
-      : run.status !== 'SUCCEEDED' || actorError ? 'error'
+      cancelled ? 'cancelled'
+      : failed ? 'error'
       : s.enrich && advertisers > 0 ? 'pages'
+      : s.page_dates && advertisers > 0 ? 'dates'
       : 'done';
     await updateSearch(s.id, {
       ...counts,
@@ -130,7 +161,7 @@ async function advance(s: SearchRow, t0: number): Promise<Step> {
               : `La búsqueda de anuncios terminó con estado ${run.status}${run.statusMessage ? `: ${run.statusMessage}` : ''}. Se guardó lo que alcanzó a extraer.`,
           }
         : {}),
-      ...(next === 'pages' ? {} : {finished_at: now()}),
+      ...(next === 'pages' || next === 'dates' ? {} : {finished_at: now()}),
     });
     return 'again';
   }
@@ -144,10 +175,10 @@ async function advance(s: SearchRow, t0: number): Promise<Step> {
       }
       const todo = await pagesToEnrich(s.id);
       if (todo.length === 0) {
-        await updateSearch(s.id, {status: 'done', cached_count: s.advertisers_count, finished_at: now()});
+        await updateSearch(s.id, {...afterContacts(s), cached_count: s.advertisers_count});
         return 'again';
       }
-      const run = await startRun(PAGES_ACTOR, pagesActorInput(todo), webhookUrl());
+      const run = await startRun(PAGES_ACTOR, pagesActorInput(todo), webhookUrl(), runLimits(todo.length, PRICE_PER_PAGE));
       await updateSearch(s.id, {pages_run_id: run.id, progress: 0, progress_total: todo.length, cached_count: s.advertisers_count - todo.length});
       return 'wait';
     }
@@ -176,8 +207,62 @@ async function advance(s: SearchRow, t0: number): Promise<Step> {
     await saveContacts(s.id, found, ok ? todo.map(t => t.page_id) : [], {
       enriched_count: found.length,
       cost_usd: s.cost_usd + (run.usageTotalUsd ?? 0),
-      status: cancelled ? 'cancelled' : ok ? 'done' : 'error',
-      error: ok || cancelled ? null : `La extracción de contactos terminó con estado ${run.status}. Los anunciantes se guardaron sin contactos.`,
+      ...(cancelled
+        ? {status: 'cancelled', finished_at: now()}
+        : ok
+          ? afterContacts(s)
+          : {
+              status: 'error',
+              error: `La extracción de contactos terminó con estado ${run.status}. Los anunciantes se guardaron sin contactos.`,
+              finished_at: now(),
+            }),
+    });
+    return 'again';
+  }
+
+  // ---- Step 3 (optional): each page's creation date ----
+  if (s.status === 'dates') {
+    if (!s.dates_run_id) {
+      if (s.cancel_requested) {
+        await updateSearch(s.id, {status: 'cancelled', finished_at: now()});
+        return 'again';
+      }
+      const todo = await pagesToDate(s.id);
+      if (todo.length === 0) {
+        await updateSearch(s.id, {status: 'done', finished_at: now()});
+        return 'again';
+      }
+      const run = await startRun(DATES_ACTOR, datesActorInput(todo), webhookUrl(), runLimits(todo.length, PRICE_PER_DATE));
+      await updateSearch(s.id, {dates_run_id: run.id, progress: 0, progress_total: todo.length});
+      return 'wait';
+    }
+    const run = await getRun(s.dates_run_id);
+    if (!TERMINAL.has(run.status)) {
+      if (s.cancel_requested) await abortRun(run.id);
+      await updateSearch(s.id, {progress: await datasetCount(run.defaultDatasetId)});
+      return 'wait';
+    }
+    const items: any[] = [];
+    for (;;) {
+      const page = await datasetItems(run.defaultDatasetId, items.length, PAGE);
+      items.push(...page);
+      if (page.length < PAGE) break;
+    }
+    const byKey = new Map<string, any>();
+    for (const p of items) for (const k of datesKeys(p)) byKey.set(k, p);
+    const todo = await pagesToDate(s.id);
+    const found = todo.flatMap(t => {
+      const p = byKey.get(t.page_id) ?? byKey.get(normUrl(t.page_url));
+      const created = p ? mapCreatedDate(p) : '';
+      return created ? [{pageId: t.page_id, created}] : [];
+    });
+    const ok = run.status === 'SUCCEEDED';
+    const cancelled = s.cancel_requested || run.status === 'ABORTED';
+    // Ads and contacts are already saved, so a failed date step leaves the search done, with a note.
+    await saveCreatedDates(s.id, found, ok ? todo.map(t => t.page_id) : [], {
+      cost_usd: s.cost_usd + (run.usageTotalUsd ?? 0),
+      status: cancelled ? 'cancelled' : 'done',
+      error: ok || cancelled ? null : `La fecha de creación de las páginas terminó con estado ${run.status}. El resto de la búsqueda se guardó.`,
       finished_at: now(),
     });
     return 'again';
@@ -189,7 +274,7 @@ async function advance(s: SearchRow, t0: number): Promise<Step> {
 async function reconcileCosts() {
   for (const s of await searchesToReconcile()) {
     let cost = 0;
-    for (const id of [...s.ads_runs.split(' '), s.pages_run_id]) if (id) cost += (await getRun(id)).usageTotalUsd ?? 0;
+    for (const id of [...s.ads_runs.split(' '), s.pages_run_id, s.dates_run_id]) if (id) cost += (await getRun(id)).usageTotalUsd ?? 0;
     await updateSearch(s.id, {cost_usd: Math.round(cost * 1e5) / 1e5, cost_final: true});
   }
 }

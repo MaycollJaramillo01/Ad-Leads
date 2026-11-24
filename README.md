@@ -4,14 +4,15 @@ Busca en la Biblioteca de anuncios de Meta (Facebook e Instagram), guarda cada a
 
 ## Pantallas
 
-- **Nueva búsqueda** (`/`): palabra clave, frase exacta o una URL de la Ads Library o de una página de Facebook. Uno o varios países, con atajos por región (Latinoamérica, habla hispana, Norteamérica, habla inglesa, Europa) o "Todos los países". Filtros de anuncios activos o inactivos, formato y fecha de publicación, límite por país y costo máximo estimado antes de lanzar. Abajo, las búsquedas recientes con su progreso en vivo.
-- **Historial** (`/busquedas`): todas las búsquedas con su estado, anuncios, anunciantes, porcentaje con email y costo real. Se pueden filtrar, ordenar, repetir o borrar.
-- **Detalle de búsqueda** (`/busquedas/:id`): progreso en vivo, opción de cancelar, cifras, parámetros usados y la tabla de anunciantes que encontró.
+- **Nueva búsqueda** (`/`): palabra clave, frase exacta o una URL de la Ads Library o de una página de Facebook. Uno o varios países, con atajos por región (Latinoamérica, habla hispana, Norteamérica, habla inglesa, Europa) o "Todos los países". Filtros de anuncios activos o inactivos, formato, idioma del anuncio y fecha de publicación, límite por país y costo máximo estimado antes de lanzar. Opción de traer la fecha de creación de cada página. Abajo, las búsquedas recientes con su progreso en vivo.
+- **Historial** (`/busquedas`): todas las búsquedas con su estado, anuncios, anunciantes, porcentaje con email y costo real. Se pueden filtrar, ordenar, repetir, borrar o volver a descargar en CSV, solo con los anunciantes que tengan correo, teléfono o ambos.
+- **Detalle de búsqueda** (`/busquedas/:id`): progreso en vivo, opción de cancelar, cifras, parámetros usados y la tabla de anunciantes que encontró. Si llegan menos anuncios de los pedidos, explica por país cuántos devolvió Apify y por qué se detuvo.
 - **Anunciantes** (`/anunciantes`): la base completa sin duplicados.
-  - Filtros por texto, país, búsqueda, estado y datos de contacto (con email, con teléfono o sin contacto).
+  - Filtros por texto, país, búsqueda, estado, contacto (casillas Correo y Teléfono; marcar las dos exige ambos) y fecha de creación de la página.
   - Orden por columna, paginación y selección múltiple para cambiar el estado de varios a la vez.
   - Exporta a CSV todo lo filtrado o solo lo seleccionado.
   - Al hacer clic en un anunciante se abre su ficha con contacto, estado del lead (nuevo, contactado, interesado, cliente, descartado), notas, anuncios con imagen y las búsquedas donde apareció.
+- **Páginas nuevas** (`/paginas-nuevas`): anunciantes cuya página de Facebook se creó en la última semana, el último mes o los últimos 3 meses, con los mismos filtros y exportación. Solo incluye páginas cuya fecha se conoce: las de búsquedas con "Fecha de creación de la página" activado.
 
 Los filtros quedan en la URL, así que una vista filtrada se puede guardar o compartir.
 
@@ -54,6 +55,9 @@ El repositorio está conectado al proyecto de Vercel: cada push a `main` se publ
 1. Cada búsqueda se guarda en la base (SQLite en local, Turso en Vercel) y avanza en pasos cortos que retoman donde se quedaron. Las búsquedas se procesan de una en una, por orden de llegada.
 2. **Paso 1, anuncios:** `curious_coder/facebook-ads-library-scraper` recibe una URL de la Ads Library por país, una ejecución por país, cada una con su tope exacto. Cada anuncio se guarda y se agrupa por página anunciante.
 3. **Paso 2, contactos:** `saswave/facebook-company-page-scraper` visita la página de cada anunciante nuevo y extrae lo que publica en "Información".
+   - **Paso 3, fecha de creación (opcional):** `premiumscraper/facebook-page-transparency-scraper` lee la "Transparencia de la página" y guarda cuándo se creó. Una página con fecha no se vuelve a consultar.
+   - Cada ejecución lleva su propio tope de resultados y de costo (`maxItems`, `maxTotalChargeUsd`). Sin ellos, Apify aplica el "costo máximo por ejecución" de la cuenta, y una búsqueda grande podía terminar como exitosa con la mitad de los anuncios.
+   - Si un país falla, la búsqueda sigue con los demás. El detalle muestra por país cuántos anuncios llegaron y por qué se detuvo.
 4. **No hace falta tener la pestaña abierta.** En local, un temporizador revisa cada 5 segundos. En Vercel, Apify avisa a `/api/apify-webhook` cuando termina cada ejecución, y la app sigue con el paso siguiente.
 5. Al cancelar se detiene la ejecución en Apify y se conserva lo ya extraído.
 
@@ -61,7 +65,9 @@ El repositorio está conectado al proyecto de Vercel: cada push a `main` se publ
 
 - $0.00075 por anuncio ($0.75 por cada 1,000).
 - $0.004 por página de anunciante ($4 por cada 1,000). Una página consultada en los últimos 30 días no se vuelve a pagar: se reutilizan sus datos.
+- $0.003 por fecha de creación de página ($3 por cada 1,000), solo si se activa.
 - Mínimo 10 anuncios por país: el actor no acepta menos.
+- El límite por país es un máximo. Si la Biblioteca de anuncios muestra menos anuncios con esos filtros, llegan menos. Su "~N resultados" es una estimación que incluye anuncios que no lista.
 
 El costo que muestra cada búsqueda es el que cobra Apify, no una estimación. Apify termina de facturar una ejecución unos segundos después de que acaba, así que el costo queda como provisional hasta 1 o 2 minutos después de terminar la búsqueda.
 

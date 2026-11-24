@@ -16,11 +16,13 @@ export function stepText(s: Search, queuePosition = -1): string {
   if (s.status === 'queued') return queuePosition > 0 ? `En cola · ${queuePosition} búsqueda(s) por delante` : 'Preparando la búsqueda…';
   if (s.status === 'ads') return `Buscando anuncios en la Ads Library… ${num.format(s.progress)} encontrados`;
   if (s.status === 'pages') return `Extrayendo contactos… ${num.format(s.progress)} de ${num.format(s.progress_total)} páginas`;
+  if (s.status === 'dates') return `Buscando cuándo se creó cada página… ${num.format(s.progress)} de ${num.format(s.progress_total)}`;
   return '';
 }
 
 export function SearchProgress({search, queuePosition = -1, isCompact}: {search: Search; queuePosition?: number; isCompact?: boolean}) {
-  const step = search.status === 'pages' ? 2 : 1;
+  const steps = 1 + (search.enrich ? 1 : 0) + (search.page_dates ? 1 : 0);
+  const step = search.status === 'dates' ? steps : search.status === 'pages' ? 2 : 1;
   const total = Math.max(search.progress_total, 1);
   const text = stepText(search, queuePosition);
   return (
@@ -41,7 +43,7 @@ export function SearchProgress({search, queuePosition = -1, isCompact}: {search:
         </Text>
         {!isCompact && (
           <Text color="secondary" hasTabularNumbers>
-            {`Paso ${step} de ${search.enrich ? 2 : 1} · ${duration(search.created_at, null)}`}
+            {`Paso ${step} de ${steps} · ${duration(search.created_at, null)}`}
           </Text>
         )}
       </HStack>

@@ -1,8 +1,9 @@
 import {useEffect, useRef} from 'react';
+import {LANGUAGE_CODES} from '../lib/scrape';
 
 // ============= TYPES (mirror src/lib/db.ts rows as JSON) =============
 
-export type SearchStatus = 'queued' | 'ads' | 'pages' | 'done' | 'error' | 'cancelled';
+export type SearchStatus = 'queued' | 'ads' | 'pages' | 'dates' | 'done' | 'error' | 'cancelled';
 export type LeadStatus = 'nuevo' | 'contactado' | 'interesado' | 'cliente' | 'descartado';
 
 export interface Search extends Record<string, unknown> {
@@ -31,6 +32,14 @@ export interface Search extends Record<string, unknown> {
   cancel_requested: boolean;
   /** False until Apify has closed the bill for its runs (about a minute after finishing). */
   cost_final: boolean;
+  /** Ads Library content languages; empty = any. */
+  languages: string[];
+  /** Step 3: look up each page's creation date. */
+  page_dates: boolean;
+  /** Items Apify returned in step 1, valid or not. */
+  raw_items: number;
+  /** One line per country: how many ads came back and why it stopped. */
+  ads_notes: string;
 }
 
 export interface Advertiser extends Record<string, unknown> {
@@ -87,6 +96,10 @@ export interface Stats {
   ads: number;
   searches: number;
   running: number;
+  /** Advertisers whose Facebook page was created in the last 30 days. */
+  newPages: number;
+  /** Advertisers whose creation date is known. */
+  withCreated: number;
   costUsd: number;
   byStatus: {status: LeadStatus; n: number}[];
   topCountries: {country: string; n: number}[];
@@ -162,11 +175,13 @@ export const SEARCH_STATUS: Record<SearchStatus, {label: string; variant: 'neutr
   queued: {label: 'En cola', variant: 'neutral'},
   ads: {label: 'Buscando anuncios', variant: 'info'},
   pages: {label: 'Extrayendo contactos', variant: 'info'},
+  dates: {label: 'Fecha de las páginas', variant: 'info'},
   done: {label: 'Completada', variant: 'success'},
   error: {label: 'Error', variant: 'error'},
   cancelled: {label: 'Cancelada', variant: 'warning'},
 };
-export const isRunning = (s: {status: SearchStatus}) => s.status === 'queued' || s.status === 'ads' || s.status === 'pages';
+export const isRunning = (s: {status: SearchStatus}) =>
+  s.status === 'queued' || s.status === 'ads' || s.status === 'pages' || s.status === 'dates';
 
 export const LEAD_STATUS: Record<LeadStatus, {label: string; variant: 'blue' | 'yellow' | 'purple' | 'green' | 'neutral'}> = {
   nuevo: {label: 'Nuevo', variant: 'blue'},
@@ -186,6 +201,36 @@ export const MEDIA_OPTIONS = [
   {value: 'none', label: 'Sin imagen ni video'},
 ];
 
+// ============= LANGUAGES =============
+
+const languageNames = new Intl.DisplayNames(['es'], {type: 'language'});
+export const languageName = (code: string) => {
+  try {
+    const n = languageNames.of(code) ?? code;
+    return n.charAt(0).toUpperCase() + n.slice(1);
+  } catch {
+    return code;
+  }
+};
+export const LANGUAGE_OPTIONS = LANGUAGE_CODES.map(c => ({value: c, label: languageName(c)}));
+export const languagesLabel = (codes: string[]) => (codes.length ? codes.map(languageName).join(', ') : 'Cualquier idioma');
+
+// ============= CONTACT FILTER =============
+
+/** The two contact checkboxes ↔ the API's `contact` value. Both checked = has email and phone. */
+export function contactFromChecks(email: boolean, phone: boolean): 'email' | 'phone' | 'both' | '' {
+  return email && phone ? 'both' : email ? 'email' : phone ? 'phone' : '';
+}
+
+/** Ranges for the "page created" filter, in days. */
+export const CREATED_OPTIONS = [
+  {value: '', label: 'Cualquier fecha'},
+  {value: '7', label: 'Últimos 7 días'},
+  {value: '30', label: 'Último mes'},
+  {value: '90', label: 'Últimos 3 meses'},
+  {value: '365', label: 'Último año'},
+];
+
 // ============= FORMAT =============
 
 export const num = new Intl.NumberFormat('es');
@@ -201,4 +246,4 @@ export function duration(fromIso: string, toIso: string | null): string {
 }
 
 // Apify list prices of the actors the server uses; the real cost comes back from each run.
-export {MIN_ADS_PER_RUN, PRICE_PER_AD, PRICE_PER_PAGE} from '../lib/scrape';
+export {MIN_ADS_PER_RUN, PRICE_PER_AD, PRICE_PER_DATE, PRICE_PER_PAGE} from '../lib/scrape';
